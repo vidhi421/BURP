@@ -1,0 +1,12 @@
+*{
+    margin:0px;
+    padding:0px;
+    box-sizing: 0px;
+}
+
+.heading2{
+    margin: 10px 0px;
+    padding:0px 10px ;
+    background-color: rgb(221, 215, 215);
+    border-radius: 10px;
+}

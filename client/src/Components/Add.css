@@ -1,0 +1,16 @@
+*{
+    margin:0px;
+    padding:0px;
+    box-sizing:border-box;
+}
+
+.addButton{
+    position:fixed;
+    color:grey;
+    bottom:27%;
+    right:1%;
+    border:0cm;
+    width:40px;
+    z-index: 99;
+    /* background-blend-mode:lighten; */
+}
