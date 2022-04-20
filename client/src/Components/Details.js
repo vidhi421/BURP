@@ -18,10 +18,11 @@ function Details(){
         setRecipe({...recipe, [name]:value});
       }
 
+    
     return(
         <div>
             <Form style={{padding:"50px"}} 
-            // onSubmit={handleSubmit}
+            onSubmit={handleInputs}
             >
                 <h1 style={{ marginBottom:"20px"}}>New Recipe</h1>
                 <h2 class="heading2">Details</h2>
@@ -80,7 +81,7 @@ function Details(){
                     type="text"
                     placeholder="" />
                 </Form.Group>
-                <Form.Group md={4} as={Col} controlId="formGridText" className="mb-3">
+                <Form.Group md={4} as={Col} controlId="formGridText" >
                 <Form.Label>Cuisine (American
                         ,Chinese
                         ,French
@@ -97,7 +98,7 @@ function Details(){
                     type="text"
                     placeholder="" />
                 </Form.Group>
-                <Form.Group md={4} as={Col} controlId="formGridText" className="mb-3">
+                <Form.Group md={4} as={Col} controlId="formGridText">
                 <Form.Label>cCourse(BreakFast
                         ,Brunch
                         ,Lunch
@@ -110,19 +111,7 @@ function Details(){
                     type="text"
                     placeholder="" />
                 </Form.Group>
-                {/* <Form.Group md={4} as={Col} controlId="formGridText" className="mb-3">
-                <Form.Label>Course(BreakFast
-                        ,Brunch
-                        ,Lunch
-                        ,Snack
-                        ,Dinner)</Form.Label>
-                    <Form.Control 
-                    value={recipe.mood}
-                    onChange={handleInputs}
-                    name="mood"
-                    type="text"
-                    placeholder="" />
-                </Form.Group> */}
+              
                 <Form.Group md={4} as={Col} controlId="formGridText" className="mb-3">
                 <Form.Label>Mood(Casual
                     ,Comfort
@@ -154,7 +143,7 @@ function Details(){
                     type="text"
                     placeholder="" />
                 </Form.Group>
-                <Button type="submit">Submit form</Button>
+                <Button type="submit" onSubmit={handleInputs}>Submit form</Button>
             </Form>
         </div>
     );

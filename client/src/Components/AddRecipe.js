@@ -3,11 +3,36 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import { useEffect } from 'react';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import { useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom'
-//import HeaderLoggedIn from "../../../BURP/src/Components/HeaderLoggedIn.js"
 
 function AddRecipe() {
+
+    const [recipeInfo, setRecipeInfo]=useState({
+        
+    });
+
+    const [inputFields, setInputFields] = useState([
+        { Ingredient1: ''}
+    ]); 
+
+    const handleChangeInput = (index,event) => {
+        const values = [...inputFields];
+        values[index][event.target.name]  = event.target.value;
+        setInputFields(values);
+    }
+
+    const handleAddFields=()=>{
+        setInputFields([...inputFields, { Ingredient1:"" }])
+    }
+
+    const handleRemoveFields=(index)=>{
+        const values=[...inputFields];
+        values.splice(index,1);
+        setInputFields(values);
+    }
+
     const navigate=useNavigate()
 
     const  callAddrecipe = async () =>{
@@ -39,31 +64,9 @@ function AddRecipe() {
     },[]);
 
 
-
-
-
-    var survey_options = document.getElementById('survey_options1');
-// var add_more_fields = document.getElementById('add_more_fields');
-// var remove_fields = document.getElementById('remove_fields');
-
-let AddFields= function(){
-    var newField = document.createElement('input');
-    newField.setAttribute('type','text');
-    // newField.setAttribute('name','instruction');
-    newField.setAttribute('className','instructions');
-    newField.setAttribute('size','70');
-    survey_options.appendChild(newField);
-}
-
-let removeFields= function(){
-    var input_tags = survey_options.getElementsByTagName('input');
-    if(input_tags.length > 2) {
-        survey_options.removeChild(input_tags[(input_tags.length)-1])
-    }
-}
   return (
     <div>
-        {/* <HeaderLoggedIn/> */}
+
         <Form  method="POST" style={{padding:"50px"}}>
             <h1 style={{ marginBottom:"20px"}}>New Recipe</h1>
             <h2 class="heading2">Details</h2>
@@ -95,40 +98,40 @@ let removeFields= function(){
             <Form.Group md={4} as={Col} controlId="formGridState">
                 <Form.Label>Traditional</Form.Label>
                 <Form.Select defaultValue="Choose...">
-                    <option>Choose...</option>
-                    <option>East</option>
-                    <option>North</option>
-                    <option>North Eastern</option>
-                    <option>West</option>
-                    <option>South</option>
+                    <option value="Choose...">Choose...</option>
+                    <option value="East">East</option>
+                    <option value="North">North</option>
+                    <option value="North Eastern">North Eastern</option>
+                    <option value="West">West</option>
+                    <option value="South">South</option>
                 </Form.Select>
                 </Form.Group>
 
                 <Form.Group md={4} as={Col} controlId="formGridState">
                     <Form.Label>Cuisine</Form.Label>
                     <Form.Select defaultValue="Choose...">
-                        <option>Choose...</option>
-                        <option>American</option>
-                        <option>Chinese</option>
-                        <option>French</option>
-                        <option>Italian</option>
-                        <option>Japanese</option>
-                        <option>Korean</option>
-                        <option>Mexican</option>
-                        <option>Spanish</option>
-                        <option>Thai</option>
+                        <option value="Choose...">Choose...</option>
+                        <option value="America">American</option>
+                        <option value="Chinese">Chinese</option>
+                        <option value="French">French</option>
+                        <option value="Italian">Italian</option>
+                        <option value="Japanese">Japanese</option>
+                        <option value="Korean">Korean</option>
+                        <option value="Mexican">Mexican</option>
+                        <option value="Spanish">Spanish</option>
+                        <option value="Thai">Thai</option>
                     </Form.Select>
                 </Form.Group>
 
                 <Form.Group md={4} as={Col} controlId="formGridState">
                     <Form.Label>Course</Form.Label>
                     <Form.Select defaultValue="Choose...">
-                        <option>Choose...</option>
-                        <option>BreakFast</option>
-                        <option>Brunch</option>
-                        <option>Lunch</option>
-                        <option>Snack</option>
-                        <option>Dinner</option>
+                        <option value="Choose...">Choose...</option>
+                        <option value="BreakFast">BreakFast</option>
+                        <option value="Brunch">Brunch</option>
+                        <option value="Lunch">Lunch</option>
+                        <option value="Snack">Snack</option>
+                        <option value="Dinner">Dinner</option>
                     </Form.Select>
                 </Form.Group>
             
@@ -138,33 +141,34 @@ let removeFields= function(){
             <Form.Group md={4} as={Col} controlId="formGridState">
                 <Form.Label>Mood</Form.Label>
                 <Form.Select defaultValue="Choose...">
-                    <option>Casual</option>
-                    <option>Comfort</option>
-                    <option>Happy</option>
-                    <option>Family Friendly</option>
-                    <option>Pocket Friendly</option>
+                    <option value="Choose...">Choose...</option>
+                    <option value="Casual">Casual</option>
+                    <option value="Comfort">Comfort</option>
+                    <option value="Happy">Happy</option>
+                    <option value="Family Friendly">Family Friendly</option>
+                    <option value="Pocket Friendly">Pocket Friendly</option>
                 </Form.Select>
             </Form.Group>
 
             <Form.Group md={4} as={Col} controlId="formGridState">
                 <Form.Label>Diet</Form.Label>
                 <Form.Select defaultValue="Choose...">
-                    <option>Choose...</option>
-                    <option>Low Fat</option>
-                    <option>Low Calorie</option>
-                    <option>Veg</option>
-                    <option>Vegan</option>
+                    <option value="Choose...">Choose...</option>
+                    <option value="Low Fat">Low Fat</option>
+                    <option value="Low Calorie">Low Calorie</option>
+                    <option value="Veg">Veg</option>
+                    <option value="Vegan">Vegan</option>
                 </Form.Select>
             </Form.Group>
 
             <Form.Group md={4} as={Col} controlId="formGridState">
                 <Form.Label>Skills</Form.Label>
                 <Form.Select defaultValue="Choose...">
-                    <option>Choose...</option>
-                    <option>Easy</option>
-                    <option>Medium</option>
-                    <option>Hard</option>
-                    <option>Kids</option>
+                    <option value="Choose...">Choose...</option>
+                    <option value="Easy">Easy</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Hard">Hard</option>
+                    <option value="Kids">Kids</option>
                 </Form.Select>
             </Form.Group>
             </Row>
@@ -183,32 +187,46 @@ let removeFields= function(){
             
             <hr></hr>
             <h2 class="heading2">Instructions</h2>
-                <div id="survey_options1">
-                    <input type="text" className="instructions" size="70"/>
-                    <input type="text" className="instructions" size="70"/>
-                    
-                </div>
-                <div class="controls">
-                    <Button style={{margin:"10px"}} id="add_more_fields" variant="success" onClick={AddFields}>Add Instruction</Button>
-                    <Button style={{margin:"10px"}} id="remove_fields" variant="success" onClick={removeFields}>Remove Last</Button>
-                    {/* <a href="#" id="add_more_fields">Add Instruction</a>
-                    <a href="#" id="remove_fields">Remove Last</a> */}
-                </div>
+            <div id="survey_options1">
+                <FloatingLabel controlId="floatingTextarea2">
+                    <Form.Control
+                    // value={user.instructions}
+                    // onChange={handleInputs}
+                    name="instructions"
+                    as="textarea"
+                    placeholder="Leave a comment here"
+                    style={{ height: '100px' }}
+                    />
+                </FloatingLabel>
+            </div>
             <hr></hr>
             <h2 class="heading2">Ingredients</h2>
-            {/* <input type="text" className=""></input> */}
-                <div id="survey_options2">
-                    <input type="text" className="ingredients" size="30"/>
-                    <input type="text" className="ingredients" size="30"/>
-                    <input type="text" className="ingredients" size="30"/>
-                    <input type="text" className="ingredients" size="30"/>
+            { inputFields.map((inputFields, index) => (
+                <div key={index}y>
+                    <Row className="mb-3">
+                        <Form.Group as={Col} >
+                            <Form.Control 
+                            name="Ingredient1"
+                            value={inputFields.Ingredient1}
+                            placeholder=""
+                            onChange={event => handleChangeInput(index,event)}
+                            />
+                        </Form.Group>
+                    </Row>
                 </div>
-                <div class="controls">
-                    <Button style={{margin:"10px"}} id="add_more_fields" variant="success" onClick={AddFields}>Add Ingredients</Button>
-                    <Button style={{margin:"10px"}} id="remove_fields" variant="success" onClick={removeFields}>Remove Last</Button>
-                    {/* <a href="#" id="add_more_fields">Add Instruction</a>
-                    <a href="#" id="remove_fields">Remove Last</a> */}
-                </div> 
+            ))}       
+                <Button 
+                variant="secondary" 
+                style={{margin:"10px"}} 
+                onClick ={handleAddFields} >
+                    Add Ingredient 
+                </Button>
+                <Button 
+                variant="secondary" 
+                style={{margin:"10px"}} 
+                onClick ={handleRemoveFields}>
+                    Remove Ingredient
+                </Button>
             <hr></hr>
             <h2 class="heading2">Nutrition</h2>
             <Row>

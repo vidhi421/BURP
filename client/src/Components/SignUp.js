@@ -149,24 +149,26 @@ function SignUp() {
           </Form.Group>
         <Row className="mb-3">
           <Form.Group as={Col} md="4" controlId="validationCustom03">
-          <Form.Label>Gender</Form.Label>
-          <Form.Select 
-                value={user.gender}
-                name="gender"
-                // defaultValue="Prefer not to say"
+                <Form.Label>Gender</Form.Label>
+                <Form.Select 
+                  name="gender"
+                  placeholder="Choose your Gender"
                 >
                     <option>Female</option>
                     <option>Male</option>
-                    {/* <option>Prefer not to say</option> */}
+                    <option>Prefer not to say</option> 
                 </Form.Select>
-                  
-                    {/* <option>Female</option>
-                    <option>Male</option>
-                    <option>Prefer not to say</option> */}
-                {/* </Form.Select> */}
-              
+          </Form.Group> 
+          
+          <Form.Group as={Col} md="4" controlId="validationCustom03">
+            <Form.Label>Gender</Form.Label>
+            <Form.Control 
+            value={user.gender}
+            onChange={handleInputs}
+            name="gender"
+            type="text" placeholder="Gender"/>
             {/* <Form.Control.Feedback type="invalid">
-              Please provide a valid city.
+              Please provide a valid age.
             </Form.Control.Feedback> */}
           </Form.Group>
           <Form.Group as={Col} md="4" controlId="validationCustom04">

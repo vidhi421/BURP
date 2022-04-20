@@ -13,9 +13,9 @@ import { Link } from "react-router-dom"
 function Header() {
 
   return (
-    <div>
+    <div  style={{marginBottom:"78px"}}>
         {/* bg="dark" variant="dark"sticky="top" */}
-        <Navbar bg="light" expand="lg" sticky="top">
+        <Navbar bg="light" expand="lg" fixed="top">
         <Container fluid>
             <Link to="/">
                 <img
