@@ -10,14 +10,24 @@ import { useNavigate } from 'react-router-dom'
 function AddRecipe() {
 
     const [recipeInfo, setRecipeInfo]=useState({
-        
+         author:"", title:"", description:"",
+        //   image:"",
+         traditional:"", cuisine:"", course:"", moods:"", diet:"",skills:"", 
+         servings:"", time:"",
+         instructions:"",
+        //  ingredients:[],
+         kcal:"", fat:"", protein:"", carbs:"", sugar:"" , fibre:""
     });
 
+    
+
+    //ingredients:-
     const [inputFields, setInputFields] = useState([
         { Ingredient1: ''}
     ]); 
 
     const handleChangeInput = (index,event) => {
+        console.log(event)
         const values = [...inputFields];
         values[index][event.target.name]  = event.target.value;
         setInputFields(values);
@@ -32,7 +42,24 @@ function AddRecipe() {
         values.splice(index,1);
         setInputFields(values);
     }
+    //for the rest fields
+    let name,value;
+    const handleInputs=(e)=>{
+        e.preventDefault();
+        console.log(e);
+        // console.log(recipeInfo);
+        name=e.target.name;
+        value=e.target.value;
+        setRecipeInfo({...recipeInfo, [name]:value});
+    }
+    // handleSubmit for ingredients
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // console.log("inputFields", inputFields); 
+        console.log("recipeInfo", recipeInfo)
+    };
 
+    //middleware
     const navigate=useNavigate()
 
     const  callAddrecipe = async () =>{
@@ -67,27 +94,45 @@ function AddRecipe() {
   return (
     <div>
 
-        <Form  method="POST" style={{padding:"50px"}}>
+        <Form  
+        // method="POST" 
+        onChange={handleSubmit}
+        style={{padding:"50px"}}>
             <h1 style={{ marginBottom:"20px"}}>New Recipe</h1>
             <h2 class="heading2">Details</h2>
             <Row className="mb-3">
                 <Form.Group md={6} as={Col} controlId="formGridEmail">
                 <Form.Label>Author</Form.Label>
-                <Form.Control type="email" placeholder="example01@gmail.com" />
+                <Form.Control 
+                value={recipeInfo.author}
+                onChange={handleInputs}
+                name="author"
+                type="text" 
+                placeholder="example01@gmail.com" />
                 </Form.Group>
 
                 <Form.Group md={6} as={Col} controlId="formGridPassword">
                 <Form.Label>Title</Form.Label>
-                <Form.Control type="text" placeholder="Title of the Recipe" />
+                <Form.Control 
+                value={recipeInfo.title}
+                onChange={handleInputs}
+                name="title"
+                type="text" 
+                placeholder="Title of the Recipe" />
                 </Form.Group>
             </Row>
 
-            <Form.Group className="mb-3" controlId="formGridText">
+            <Form.Group className="mb-3" controlId="formGridText1">
                 <Form.Label>Description</Form.Label>
-                <Form.Control placeholder="About the recipe"/>
+                <Form.Control 
+                value={recipeInfo.description}
+                onChange={handleInputs}
+                name="description"
+                type="text"
+                placeholder="About the recipe"/>
             </Form.Group>
 
-            <Form.Group controlId="formFile" className="mb-3">
+            <Form.Group controlId="formFile1" className="mb-3">
                 <Form.Label>Recipe Image</Form.Label>
                 <Form.Control type="file" />
             </Form.Group>
@@ -95,9 +140,13 @@ function AddRecipe() {
             <hr></hr>
             <h2 class="heading2">Filters</h2>
             <Row>
-            <Form.Group md={4} as={Col} controlId="formGridState">
+            <Form.Group md={4} as={Col} controlId="formGridState1">
                 <Form.Label>Traditional</Form.Label>
-                <Form.Select defaultValue="Choose...">
+                <Form.Select 
+                value={recipeInfo.traditional}
+                onChange={handleInputs}
+                name="traditional"
+                defaultValue="Choose...">
                     <option value="Choose...">Choose...</option>
                     <option value="East">East</option>
                     <option value="North">North</option>
@@ -107,9 +156,13 @@ function AddRecipe() {
                 </Form.Select>
                 </Form.Group>
 
-                <Form.Group md={4} as={Col} controlId="formGridState">
+                <Form.Group md={4} as={Col} controlId="formGridState2">
                     <Form.Label>Cuisine</Form.Label>
-                    <Form.Select defaultValue="Choose...">
+                    <Form.Select 
+                    value={recipeInfo.cuisine}
+                    onChange={handleInputs}
+                    name="cuisine"
+                    defaultValue="Choose...">
                         <option value="Choose...">Choose...</option>
                         <option value="America">American</option>
                         <option value="Chinese">Chinese</option>
@@ -123,9 +176,13 @@ function AddRecipe() {
                     </Form.Select>
                 </Form.Group>
 
-                <Form.Group md={4} as={Col} controlId="formGridState">
+                <Form.Group md={4} as={Col} controlId="formGridState3">
                     <Form.Label>Course</Form.Label>
-                    <Form.Select defaultValue="Choose...">
+                    <Form.Select 
+                    value={recipeInfo.course}
+                    onChange={handleInputs}
+                    name="course"
+                    defaultValue="Choose...">
                         <option value="Choose...">Choose...</option>
                         <option value="BreakFast">BreakFast</option>
                         <option value="Brunch">Brunch</option>
@@ -138,9 +195,13 @@ function AddRecipe() {
             </Row>
 
             <Row>
-            <Form.Group md={4} as={Col} controlId="formGridState">
+            <Form.Group md={4} as={Col} controlId="formGridState4">
                 <Form.Label>Mood</Form.Label>
-                <Form.Select defaultValue="Choose...">
+                <Form.Select 
+                value={recipeInfo.mood}
+                onChange={handleInputs}
+                name="mood"
+                defaultValue="Choose...">
                     <option value="Choose...">Choose...</option>
                     <option value="Casual">Casual</option>
                     <option value="Comfort">Comfort</option>
@@ -150,9 +211,13 @@ function AddRecipe() {
                 </Form.Select>
             </Form.Group>
 
-            <Form.Group md={4} as={Col} controlId="formGridState">
+            <Form.Group md={4} as={Col} controlId="formGridState5">
                 <Form.Label>Diet</Form.Label>
-                <Form.Select defaultValue="Choose...">
+                <Form.Select 
+                value={recipeInfo.diet}
+                onChange={handleInputs}
+                name="diet"
+                defaultValue="Choose...">
                     <option value="Choose...">Choose...</option>
                     <option value="Low Fat">Low Fat</option>
                     <option value="Low Calorie">Low Calorie</option>
@@ -161,9 +226,13 @@ function AddRecipe() {
                 </Form.Select>
             </Form.Group>
 
-            <Form.Group md={4} as={Col} controlId="formGridState">
+            <Form.Group md={4} as={Col} controlId="formGridState6">
                 <Form.Label>Skills</Form.Label>
-                <Form.Select defaultValue="Choose...">
+                <Form.Select 
+                value={recipeInfo.skills}
+                onChange={handleInputs}
+                name="skills"
+                defaultValue="Choose...">
                     <option value="Choose...">Choose...</option>
                     <option value="Easy">Easy</option>
                     <option value="Medium">Medium</option>
@@ -177,11 +246,18 @@ function AddRecipe() {
             <Row>
                 <Col md={6}>
                     <Form.Label>No. of Servings</Form.Label>
-                    <Form.Control placeholder="Serves" />
+                    <Form.Control value={recipeInfo.servings}
+                    onChange={handleInputs}
+                    name="servings"
+                    placeholder="Serves" />
                 </Col>
                 <Col md={6}>
                     <Form.Label>Cooking Time</Form.Label>
-                    <Form.Control placeholder="Cook" />
+                    <Form.Control 
+                    value={recipeInfo.time}
+                    onChange={handleInputs}
+                    name="time"
+                    placeholder="Cooking Time" />
                 </Col>
             </Row>
             
@@ -190,8 +266,8 @@ function AddRecipe() {
             <div id="survey_options1">
                 <FloatingLabel controlId="floatingTextarea2">
                     <Form.Control
-                    // value={user.instructions}
-                    // onChange={handleInputs}
+                    value={recipeInfo.instructions}
+                    onChange={handleInputs}
                     name="instructions"
                     as="textarea"
                     placeholder="Leave a comment here"
@@ -200,16 +276,16 @@ function AddRecipe() {
                 </FloatingLabel>
             </div>
             <hr></hr>
-            <h2 class="heading2">Ingredients</h2>
+            {/* <h2 class="heading2">Ingredients</h2>
             { inputFields.map((inputFields, index) => (
-                <div key={index}y>
+                <div key={index}>
                     <Row className="mb-3">
                         <Form.Group as={Col} >
                             <Form.Control 
                             name="Ingredient1"
                             value={inputFields.Ingredient1}
                             placeholder=""
-                            onChange={event => handleChangeInput(index,event)}
+                            onChange={(event) => handleChangeInput(index,event)}
                             />
                         </Form.Group>
                     </Row>
@@ -226,37 +302,61 @@ function AddRecipe() {
                 style={{margin:"10px"}} 
                 onClick ={handleRemoveFields}>
                     Remove Ingredient
-                </Button>
+                </Button> */}
             <hr></hr>
             <h2 class="heading2">Nutrition</h2>
             <Row>
                 <Col md={2}>
                     <Form.Label>KCal</Form.Label>
-                    <Form.Control placeholder="0"/>
+                    <Form.Control 
+                    value={recipeInfo.kcal}
+                    onChange={handleInputs}
+                    name="kcal"
+                    placeholder="0"/>
                 </Col>
                 <Col md={2}>
                     <Form.Label>Fat</Form.Label>
-                    <Form.Control placeholder="0"/>
+                    <Form.Control 
+                    value={recipeInfo.fat}
+                    onChange={handleInputs}
+                    name="fat"
+                    placeholder="0"/>
                 </Col>
                 <Col md={2}>
                     <Form.Label>Protein</Form.Label>
-                    <Form.Control placeholder="0"/>
+                    <Form.Control 
+                    value={recipeInfo.protein}
+                    onChange={handleInputs}
+                    name="protein"
+                    placeholder="0"/>
                 </Col>
                 <Col md={2}>
                     <Form.Label>Carbs</Form.Label>
-                    <Form.Control placeholder="0"/>
+                    <Form.Control 
+                    value={recipeInfo.carbs}
+                    onChange={handleInputs}
+                    name="carbs"
+                    placeholder="0"/>
                 </Col>
                 <Col md={2}>
                     <Form.Label>Sugar</Form.Label>
-                    <Form.Control placeholder="0"/>
+                    <Form.Control 
+                    value={recipeInfo.sugar}
+                    onChange={handleInputs}
+                    name="sugar"
+                    placeholder="0"/>
                 </Col>
                 <Col md={2}>
                     <Form.Label>Fibre</Form.Label>
-                    <Form.Control placeholder="0"/>
+                    <Form.Control 
+                    value={recipeInfo.fibre}
+                    onChange={handleInputs}
+                    name="fibre"
+                    placeholder="0"/>
                 </Col>
             </Row>
             <hr></hr>
-            <Button style={{margin:"10px"}} variant="success" type="submit">
+            <Button style={{margin:"10px"}} variant="success" onChange={handleSubmit}type="submit">
                 Save
             </Button>
             <Button style={{margin:"10px"}} variant="success" type="submit">
