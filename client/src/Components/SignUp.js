@@ -152,25 +152,15 @@ function SignUp() {
                 <Form.Label>Gender</Form.Label>
                 <Form.Select 
                   name="gender"
-                  placeholder="Choose your Gender"
+                  onChange={handleInputs}
+                  defaultValue="Choose..."
                 >
-                    <option>Female</option>
-                    <option>Male</option>
-                    <option>Prefer not to say</option> 
+                    <option value="Choose...">Choose...</option>
+                    <option value="Female">Female</option>
+                    <option value="Male">Male</option>
+                    <option value="Prefer not to say">Prefer not to say</option> 
                 </Form.Select>
           </Form.Group> 
-          
-          <Form.Group as={Col} md="4" controlId="validationCustom03">
-            <Form.Label>Gender</Form.Label>
-            <Form.Control 
-            value={user.gender}
-            onChange={handleInputs}
-            name="gender"
-            type="text" placeholder="Gender"/>
-            {/* <Form.Control.Feedback type="invalid">
-              Please provide a valid age.
-            </Form.Control.Feedback> */}
-          </Form.Group>
           <Form.Group as={Col} md="4" controlId="validationCustom04">
             <Form.Label>Age</Form.Label>
             <Form.Control 
