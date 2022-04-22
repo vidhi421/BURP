@@ -42,25 +42,46 @@ function AddRecipe() {
 
     const PostData = async(e)=>{
         e.preventDefault();
-        const{author,title,description,
-         image,
-          cuisine, course, mood, diet,skills, 
-         numserve, cooktime,
-         instruction,ingredients,
-         kcal, fat, protein, carbs, sugar , fibre}=recipeInfo;
+        // const{author,title,description,
+        //   cuisine, course, mood, diet,skills, 
+        //  numserve, cooktime,
+        //  instruction,ingredients,
+        //  kcal, fat, protein, carbs, sugar , fibre}=recipeInfo;
+         const fd= new FormData();
+         fd.append('image',recipeInfo.image,recipeInfo.image.name);
+         fd.append('author',recipeInfo.author)
+         fd.append('title',recipeInfo.title)
+         fd.append('description',recipeInfo.description)
+         fd.append('cuisine',recipeInfo.cuisine)
+         fd.append('course',recipeInfo.course)
+         fd.append('mood',recipeInfo.mood)
+         fd.append('diet',recipeInfo.diet)
+         fd.append('skills',recipeInfo.skills)
+         fd.append('numserve',recipeInfo.numserve)
+         fd.append('cooktime',recipeInfo.cooktime)
+         fd.append('instruction',recipeInfo.instruction)
+         fd.append('ingredients',recipeInfo.ingredients)
+         fd.append('kacl',recipeInfo.kcal)
+         fd.append('fat',recipeInfo.fat)
+         fd.append('protein',recipeInfo.protein)
+         fd.append('carbs',recipeInfo.carbs)
+         fd.append('sugar',recipeInfo.sugar)
+         fd.append('fibre',recipeInfo.fibre)
 
          const res = await fetch("/AddRecipe",{
              method:"POST",
-             headers:{
-                 "Content-Type":"application/json"
-             },
-             body: JSON.stringify({
-                author,title,description,image,
-                 cuisine, course, mood, diet,skills, 
-                numserve, cooktime,
-                instruction,ingredients,
-                kcal, fat, protein, carbs, sugar , fibre
-             })
+            //  headers:{
+            //      "Content-Type":"application/json"
+            //  },
+            //  body: JSON.stringify({
+            //     author,title,description,
+            //      cuisine, course, mood, diet,skills, 
+            //     numserve, cooktime,
+            //     instruction,ingredients,
+            //     kcal, fat, protein, carbs, sugar , fibre
+            //  }) ,fd
+
+            body: fd
          });
 
          const data=await res.json();
