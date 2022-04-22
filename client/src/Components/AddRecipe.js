@@ -3,12 +3,82 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import { useEffect } from 'react';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import { useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom'
-//import HeaderLoggedIn from "../../../BURP/src/Components/HeaderLoggedIn.js"
 
 function AddRecipe() {
+
     const navigate=useNavigate()
+
+
+    const [recipeInfo, setRecipeInfo]=useState({
+        author:"", title:"", description:"",
+         image:"",
+          cuisine:"", course:"", mood:"", diet:"",skills:"", 
+         numserve:"", cooktime:"",
+         instruction:"",
+        ingredients:"",
+         kcal:"", fat:"", protein:"", carbs:"", sugar:"" , fibre:""
+    });
+
+    let name,value;
+    const imageUpload=(event)=>{
+        console.log(event.target.files[0]);
+        setRecipeInfo({...recipeInfo,image:event.target.files[0]});
+    }
+    
+
+    
+    //for the rest fields
+    const handleInputs=(e)=>{
+        e.preventDefault();
+        console.log(e);
+        // console.log(recipeInfo);
+        name=e.target.name;
+        value=e.target.value;
+        setRecipeInfo({...recipeInfo, [name]:value});
+    }
+
+    const PostData = async(e)=>{
+        e.preventDefault();
+        const{author,title,description,
+         image,
+          cuisine, course, mood, diet,skills, 
+         numserve, cooktime,
+         instruction,ingredients,
+         kcal, fat, protein, carbs, sugar , fibre}=recipeInfo;
+
+         const res = await fetch("/AddRecipe",{
+             method:"POST",
+             headers:{
+                 "Content-Type":"application/json"
+             },
+             body: JSON.stringify({
+                author,title,description,image,
+                 cuisine, course, mood, diet,skills, 
+                numserve, cooktime,
+                instruction,ingredients,
+                kcal, fat, protein, carbs, sugar , fibre
+             })
+         });
+
+         const data=await res.json();
+
+         if(data.status===422 || !data){
+             window.alert("invalid");
+             console.log("invalid");
+         } else{
+            window.alert("recipe added!");
+            console.log("recipe added!");
+
+            navigate("/Profile");
+         }
+
+    }
+
+    //middleware
+    
 
     const  callAddrecipe = async () =>{
         try{
@@ -39,132 +109,152 @@ function AddRecipe() {
     },[]);
 
 
+    // const handelReset=()=>({
+    //     author:"", title:"", description:"",
+    //      image:"",
+    //      numserve:"", cooktime:"",
+    //      instruction:"",
+    //     ingredients:"",
+    //      kcal:"", fat:"", protein:"", carbs:"", sugar:"" , fibre:""
+    // });
 
-
-
-    var survey_options = document.getElementById('survey_options1');
-// var add_more_fields = document.getElementById('add_more_fields');
-// var remove_fields = document.getElementById('remove_fields');
-
-let AddFields= function(){
-    var newField = document.createElement('input');
-    newField.setAttribute('type','text');
-    // newField.setAttribute('name','instruction');
-    newField.setAttribute('className','instructions');
-    newField.setAttribute('size','70');
-    survey_options.appendChild(newField);
-}
-
-let removeFields= function(){
-    var input_tags = survey_options.getElementsByTagName('input');
-    if(input_tags.length > 2) {
-        survey_options.removeChild(input_tags[(input_tags.length)-1])
-    }
-}
   return (
     <div>
-        {/* <HeaderLoggedIn/> */}
-        <Form  method="POST" style={{padding:"50px"}}>
+
+        <Form  
+         method="POST" 
+        //onChange={handleSubmit}
+        style={{padding:"50px"}}>
             <h1 style={{ marginBottom:"20px"}}>New Recipe</h1>
             <h2 class="heading2">Details</h2>
             <Row className="mb-3">
                 <Form.Group md={6} as={Col} controlId="formGridEmail">
                 <Form.Label>Author</Form.Label>
-                <Form.Control type="email" placeholder="example01@gmail.com" />
+                <Form.Control 
+                value={recipeInfo.author}
+                onChange={handleInputs}
+                name="author"
+                type="text" 
+                placeholder="example01@gmail.com" />
                 </Form.Group>
 
                 <Form.Group md={6} as={Col} controlId="formGridPassword">
                 <Form.Label>Title</Form.Label>
-                <Form.Control type="text" placeholder="Title of the Recipe" />
+                <Form.Control 
+                value={recipeInfo.title}
+                onChange={handleInputs}
+                name="title"
+                type="text" 
+                placeholder="Title of the Recipe" />
                 </Form.Group>
             </Row>
 
-            <Form.Group className="mb-3" controlId="formGridText">
+            <Form.Group className="mb-3" controlId="formGridText1">
                 <Form.Label>Description</Form.Label>
-                <Form.Control placeholder="About the recipe"/>
+                <Form.Control 
+                value={recipeInfo.description}
+                onChange={handleInputs}
+                name="description"
+                type="text"
+                placeholder="About the recipe"/>
             </Form.Group>
 
-            <Form.Group controlId="formFile" className="mb-3">
+            <Form.Group controlId="formFile1" className="mb-3">
                 <Form.Label>Recipe Image</Form.Label>
-                <Form.Control type="file" />
+                <Form.Control type="file" name="image" onChange={imageUpload}/>
             </Form.Group>
 
             <hr></hr>
             <h2 class="heading2">Filters</h2>
             <Row>
-            <Form.Group md={4} as={Col} controlId="formGridState">
-                <Form.Label>Traditional</Form.Label>
-                <Form.Select defaultValue="Choose...">
-                    <option>Choose...</option>
-                    <option>East</option>
-                    <option>North</option>
-                    <option>North Eastern</option>
-                    <option>West</option>
-                    <option>South</option>
-                </Form.Select>
-                </Form.Group>
 
-                <Form.Group md={4} as={Col} controlId="formGridState">
+                <Form.Group md={6} as={Col} controlId="formGridState2">
                     <Form.Label>Cuisine</Form.Label>
-                    <Form.Select defaultValue="Choose...">
-                        <option>Choose...</option>
-                        <option>American</option>
-                        <option>Chinese</option>
-                        <option>French</option>
-                        <option>Italian</option>
-                        <option>Japanese</option>
-                        <option>Korean</option>
-                        <option>Mexican</option>
-                        <option>Spanish</option>
-                        <option>Thai</option>
+                    <Form.Select 
+                    //value={recipeInfo.cuisine}
+                    onChange={handleInputs}
+                    name="cuisine"
+                    defaultValue="Choose...">
+                        <option value="Choose...">Choose...</option>
+                        <option value="America">American</option>
+                        <option value="Chinese">Chinese</option>
+                        <option value="French">French</option>
+                        <option value="Indian">Indian</option>
+                        <option value="Italian">Italian</option>
+                        <option value="Japanese">Japanese</option>
+                        <option value="Korean">Korean</option>
+                        <option value="Mexican">Mexican</option>
+                        <option value="Spanish">Spanish</option>
+                        <option value="Thai">Thai</option>
                     </Form.Select>
                 </Form.Group>
 
-                <Form.Group md={4} as={Col} controlId="formGridState">
+                <Form.Group md={6} as={Col} controlId="formGridState3">
                     <Form.Label>Course</Form.Label>
-                    <Form.Select defaultValue="Choose...">
-                        <option>Choose...</option>
-                        <option>BreakFast</option>
-                        <option>Brunch</option>
-                        <option>Lunch</option>
-                        <option>Snack</option>
-                        <option>Dinner</option>
+                    <Form.Select 
+                    //value={recipeInfo.course}
+                    onChange={handleInputs}
+                    name="course"
+                    defaultValue="Choose...">
+                        <option value="Choose...">Choose...</option>
+                        <option value="BreakFast">BreakFast</option>
+                        <option value="Brunch">Brunch</option>
+                        <option value="Dessert">Dessert</option>
+                        <option value="Drinks">Drinks</option>
+                        <option value="Lunch">Lunch</option>
+                        <option value="Snack">Snack</option>
+                        <option value="Soup-course">Soup-course</option>
+                        <option value="Dinner">Dinner</option>
                     </Form.Select>
                 </Form.Group>
             
             </Row>
 
             <Row>
-            <Form.Group md={4} as={Col} controlId="formGridState">
+            <Form.Group md={4} as={Col} controlId="formGridState4">
                 <Form.Label>Mood</Form.Label>
-                <Form.Select defaultValue="Choose...">
-                    <option>Casual</option>
-                    <option>Comfort</option>
-                    <option>Happy</option>
-                    <option>Family Friendly</option>
-                    <option>Pocket Friendly</option>
+                <Form.Select 
+                //value={recipeInfo.mood}
+                onChange={handleInputs}
+                name="mood"
+                defaultValue="Choose...">
+                    <option value="Choose...">Choose...</option>
+                    <option value="Casual">Casual</option>
+                    <option value="Comfort">Comfort</option>
+                    <option value="Happy">Happy</option>
+                    <option value="Family Friendly">Family Friendly</option>
+                    <option value="Pocket Friendly">Pocket Friendly</option>
                 </Form.Select>
             </Form.Group>
 
-            <Form.Group md={4} as={Col} controlId="formGridState">
+            <Form.Group md={4} as={Col} controlId="formGridState5">
                 <Form.Label>Diet</Form.Label>
-                <Form.Select defaultValue="Choose...">
-                    <option>Choose...</option>
-                    <option>Low Fat</option>
-                    <option>Low Calorie</option>
-                    <option>Veg</option>
-                    <option>Vegan</option>
+                <Form.Select 
+                //value={recipeInfo.diet}
+                onChange={handleInputs}
+                name="diet"
+                defaultValue="Choose...">
+                    <option value="Choose...">Choose...</option>
+                    <option value="Low Fat">Low Fat</option>
+                    <option value="Low Calorie">Low Calorie</option>
+                    <option value="Vegetarian">Vegetarian</option>
+                    <option value="Low-salt">Low-salt</option>
+                    <option value="Healthy">Healthy</option>
                 </Form.Select>
             </Form.Group>
 
-            <Form.Group md={4} as={Col} controlId="formGridState">
+            <Form.Group md={4} as={Col} controlId="formGridState6">
                 <Form.Label>Skills</Form.Label>
-                <Form.Select defaultValue="Choose...">
-                    <option>Choose...</option>
-                    <option>Easy</option>
-                    <option>Medium</option>
-                    <option>Hard</option>
-                    <option>Kids</option>
+                <Form.Select 
+                //value={recipeInfo.skills}
+                onChange={handleInputs}
+                name="skills"
+                defaultValue="Choose...">
+                    <option value="Choose...">Choose...</option>
+                    <option value="Easy">Easy</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Hard">Hard</option>
+                    <option value="Kids">Kids</option>
                 </Form.Select>
             </Form.Group>
             </Row>
@@ -173,75 +263,105 @@ let removeFields= function(){
             <Row>
                 <Col md={6}>
                     <Form.Label>No. of Servings</Form.Label>
-                    <Form.Control placeholder="Serves" />
+                    <Form.Control 
+                    value={recipeInfo.numserve}
+                    onChange={handleInputs}
+                    name="numserve"
+                    placeholder="Serves" />
                 </Col>
                 <Col md={6}>
                     <Form.Label>Cooking Time</Form.Label>
-                    <Form.Control placeholder="Cook" />
+                    <Form.Control 
+                    value={recipeInfo.cooktime}
+                    onChange={handleInputs}
+                    name="cooktime"
+                    placeholder="Cooking Time" />
                 </Col>
             </Row>
             
             <hr></hr>
             <h2 class="heading2">Instructions</h2>
-                <div id="survey_options1">
-                    <input type="text" className="instructions" size="70"/>
-                    <input type="text" className="instructions" size="70"/>
-                    
-                </div>
-                <div class="controls">
-                    <Button style={{margin:"10px"}} id="add_more_fields" variant="success" onClick={AddFields}>Add Instruction</Button>
-                    <Button style={{margin:"10px"}} id="remove_fields" variant="success" onClick={removeFields}>Remove Last</Button>
-                    {/* <a href="#" id="add_more_fields">Add Instruction</a>
-                    <a href="#" id="remove_fields">Remove Last</a> */}
-                </div>
+            <div id="survey_options1">
+                <FloatingLabel controlId="floatingTextarea2">
+                    <Form.Control
+                    value={recipeInfo.instruction}
+                    onChange={handleInputs}
+                    name="instruction"
+                    as="textarea"
+                    style={{ height: '100px' }}
+                    />
+                </FloatingLabel>
+            </div>
             <hr></hr>
             <h2 class="heading2">Ingredients</h2>
-            {/* <input type="text" className=""></input> */}
-                <div id="survey_options2">
-                    <input type="text" className="ingredients" size="30"/>
-                    <input type="text" className="ingredients" size="30"/>
-                    <input type="text" className="ingredients" size="30"/>
-                    <input type="text" className="ingredients" size="30"/>
-                </div>
-                <div class="controls">
-                    <Button style={{margin:"10px"}} id="add_more_fields" variant="success" onClick={AddFields}>Add Ingredients</Button>
-                    <Button style={{margin:"10px"}} id="remove_fields" variant="success" onClick={removeFields}>Remove Last</Button>
-                    {/* <a href="#" id="add_more_fields">Add Instruction</a>
-                    <a href="#" id="remove_fields">Remove Last</a> */}
-                </div> 
+            <div id="survey_options2">
+                <FloatingLabel controlId="floatingTextarea3">
+                    <Form.Control
+                    value={recipeInfo.ingredients}
+                    onChange={handleInputs}
+                    name="ingredients"
+                    as="textarea"
+                    style={{ height: '100px' }}
+                    />
+                </FloatingLabel>
+            </div>
             <hr></hr>
             <h2 class="heading2">Nutrition</h2>
             <Row>
                 <Col md={2}>
                     <Form.Label>KCal</Form.Label>
-                    <Form.Control placeholder="0"/>
+                    <Form.Control 
+                    value={recipeInfo.kcal}
+                    onChange={handleInputs}
+                    name="kcal"
+                    placeholder="0"/>
                 </Col>
                 <Col md={2}>
                     <Form.Label>Fat</Form.Label>
-                    <Form.Control placeholder="0"/>
+                    <Form.Control 
+                    value={recipeInfo.fat}
+                    onChange={handleInputs}
+                    name="fat"
+                    placeholder="0"/>
                 </Col>
                 <Col md={2}>
                     <Form.Label>Protein</Form.Label>
-                    <Form.Control placeholder="0"/>
+                    <Form.Control 
+                    value={recipeInfo.protein}
+                    onChange={handleInputs}
+                    name="protein"
+                    placeholder="0"/>
                 </Col>
                 <Col md={2}>
                     <Form.Label>Carbs</Form.Label>
-                    <Form.Control placeholder="0"/>
+                    <Form.Control 
+                    value={recipeInfo.carbs}
+                    onChange={handleInputs}
+                    name="carbs"
+                    placeholder="0"/>
                 </Col>
                 <Col md={2}>
                     <Form.Label>Sugar</Form.Label>
-                    <Form.Control placeholder="0"/>
+                    <Form.Control 
+                    value={recipeInfo.sugar}
+                    onChange={handleInputs}
+                    name="sugar"
+                    placeholder="0"/>
                 </Col>
                 <Col md={2}>
                     <Form.Label>Fibre</Form.Label>
-                    <Form.Control placeholder="0"/>
+                    <Form.Control 
+                    value={recipeInfo.fibre}
+                    onChange={handleInputs}
+                    name="fibre"
+                    placeholder="0"/>
                 </Col>
             </Row>
             <hr></hr>
-            <Button style={{margin:"10px"}} variant="success" type="submit">
+            <Button style={{margin:"10px"}} variant="success" onClick={PostData} type="submit">
                 Save
             </Button>
-            <Button style={{margin:"10px"}} variant="success" type="submit">
+                <Button style={{margin:"10px"}} variant="success" type="reset" onClick={() => setRecipeInfo(() => "")} >
                 Reset
             </Button>
         </Form>       

@@ -18,7 +18,7 @@ function Add() {
                 delay={{ show: 250, hide: 400 }}
                 overlay={renderTooltip}
             >
-                <Link to="/addRecipePage">
+                <Link to="/AddRecipe">
                 <span className="addButton"><BsPlusCircleFill size="3x" /></span>
                 </Link>
             </OverlayTrigger>

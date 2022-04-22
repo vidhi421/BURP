@@ -13,9 +13,9 @@ import { Link } from "react-router-dom"
 function Header() {
 
   return (
-    <div>
+    <div  style={{marginBottom:"78px"}}>
         {/* bg="dark" variant="dark"sticky="top" */}
-        <Navbar bg="light" expand="lg" sticky="top">
+        <Navbar bg="light" expand="lg" fixed="top">
         <Container fluid>
             <Link to="/">
                 <img
@@ -37,13 +37,13 @@ function Header() {
                 {/* <Nav.Link href="#action1">Home</Nav.Link>
                 <Nav.Link href="#action2">Link</Nav.Link> */}
                 {/* dropdown#1 */}
-                <NavDropdown title="Traditional" id="navbarScrollingDropdown">
+                {/* <NavDropdown title="Traditional" id="navbarScrollingDropdown">
                     <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">East</Link></NavDropdown.Item>
                     <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">North</Link></NavDropdown.Item>
                     <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">North Eastern</Link></NavDropdown.Item>
                     <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">West</Link></NavDropdown.Item>
                     <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">South</Link></NavDropdown.Item>
-                </NavDropdown>
+                </NavDropdown> */}
                 {/* <NavDropdown.Divider /> */}
                 {/* <NavDropdown.Item href="#action5"> */}
                     {/* Something else here */}
@@ -55,6 +55,7 @@ function Header() {
                     <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">Chinese</Link></NavDropdown.Item>
                     <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">French</Link></NavDropdown.Item>
                     <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">Italian</Link></NavDropdown.Item>
+                    <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">Indian</Link></NavDropdown.Item>
                     <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">Japanese</Link></NavDropdown.Item>
                     <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">Korean</Link></NavDropdown.Item>
                     <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">Mexican</Link></NavDropdown.Item>
@@ -67,8 +68,11 @@ function Header() {
                 <NavDropdown title="Course" id="navbarScrollingDropdown">
                     <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">BreakFast</Link></NavDropdown.Item>
                     <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">Brunch</Link></NavDropdown.Item>
+                    <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">Dessert</Link></NavDropdown.Item>
+                    <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">Drinks</Link></NavDropdown.Item>
                     <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">Lunch</Link></NavDropdown.Item>
                     <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">Snack</Link></NavDropdown.Item>
+                    <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">Soup-course</Link></NavDropdown.Item>
                     <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">Dinner</Link></NavDropdown.Item>
                 </NavDropdown>
 
@@ -93,8 +97,10 @@ function Header() {
                 <NavDropdown title="Diet" id="navbarScrollingDropdown">
                     <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">Low Fat</Link></NavDropdown.Item>
                     <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">Low Calorie</Link></NavDropdown.Item>
-                    <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">Veg</Link></NavDropdown.Item>
-                    <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">Vegan</Link></NavDropdown.Item>
+                    <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">Vegetarian</Link></NavDropdown.Item>
+                    <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">Low-salt</Link></NavDropdown.Item>
+                    <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">Healthy</Link></NavDropdown.Item>
+                    
                 </NavDropdown>
             </Nav>
             

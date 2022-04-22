@@ -59,16 +59,20 @@ function Profile() {
                 <hr></hr>
                 <Row style={{margin:"20px"}}>
                     <Col md={3} style={{ padding:"7px" }}>
-                        <img style={{height:"30vh"}} src="./user.png" alt="profile"/>
+                        <img style={{height:"30vh", borderRadius:"50%"}} src="./user.png" alt="profile"/>
                     </Col>
                     
-                    <Col md={9} style={{background:"#d9d4d9", padding:"10px", border:"2px solid grey"}}>
+                    <Col md={9} style={{padding:"10px", border:"2px solid grey", borderRadius:" 10px"}}>
                         <h2>{userData.username}</h2>
                         <br/>
-                        <p>Email : {userData.email}</p>
-                        <p>Occupation :{userData.occupation}</p>
+                        <Row style={{margin:"10px"}}>
+                            <Col md={6}>Email : {userData.email}</Col>
+                            <Col md={6}>Occupation :{userData.occupation}</Col>
+                            <br/><br/>
+                            <Col md={6}>Gender :{userData.gender}</Col>
+                            <Col md={6}>Age :{userData.age}</Col>
+                        </Row>    
                     </Col>
-                    
                 </Row>
                 <br/>
                 
