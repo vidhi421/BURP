@@ -13,7 +13,13 @@ const recipeSchema = new mongoose.Schema({
         type:String,
         required: true
     },
-    //image
+    image:{
+        type:String
+    },
+    // traditional:{
+    //     type:String,
+    //     required: true
+    // },
     cuisine:{
         type:String,
         required: true
@@ -23,6 +29,9 @@ const recipeSchema = new mongoose.Schema({
         required: true
     },
     diet:{
+        type:String,
+    },
+    skills:{
         type:String,
         required: true
     },
@@ -42,25 +51,36 @@ const recipeSchema = new mongoose.Schema({
             required:true
         }
     ,
+<<<<<<< HEAD
     ingredients:[
         {
             type:String,
             required:true
         }
     ],
+=======
+    ingredients:
+    {
+        type:String,
+        required:true
+    },
+>>>>>>> 51507b2dc3a34bac2f0ea644f9e17581db09eb50
     kcal:{
         type:Number
     },
-    fats:{
+    fat:{
         type:Number
     },
-    saturats:{
+    protein:{
         type:Number
     },
     carbs:{
         type:Number
     },
     sugar:{
+        type:Number
+    },
+    fibre:{
         type:Number
     }
 })

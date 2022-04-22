@@ -11,6 +11,7 @@ function AddRecipe() {
 
     const navigate=useNavigate()
 
+<<<<<<< HEAD
     // //ingredients:-
     // const [inputFields, setInputFields] = useState([
     //     { Ingredient1: ''}
@@ -49,11 +50,32 @@ function AddRecipe() {
     //     console.log(event.target.files[0]);
     //     setRecipeInfo({...recipeInfo,[event.target.name]:event.target.files[0]});
     // }
+=======
+
+    const [recipeInfo, setRecipeInfo]=useState({
+        author:"", title:"", description:"",
+         image:"",
+          cuisine:"", course:"", mood:"", diet:"",skills:"", 
+         numserve:"", cooktime:"",
+         instruction:"",
+        ingredients:"",
+         kcal:"", fat:"", protein:"", carbs:"", sugar:"" , fibre:""
+    });
+
+    let name,value;
+    const imageUpload=(event)=>{
+        console.log(event.target.files[0]);
+        setRecipeInfo({...recipeInfo,image:event.target.files[0]});
+    }
+>>>>>>> 51507b2dc3a34bac2f0ea644f9e17581db09eb50
     
 
     
     //for the rest fields
+<<<<<<< HEAD
     let name,value;
+=======
+>>>>>>> 51507b2dc3a34bac2f0ea644f9e17581db09eb50
     const handleInputs=(e)=>{
         e.preventDefault();
         console.log(e);
@@ -66,7 +88,11 @@ function AddRecipe() {
     const PostData = async(e)=>{
         e.preventDefault();
         const{author,title,description,
+<<<<<<< HEAD
          traditional,
+=======
+         image,
+>>>>>>> 51507b2dc3a34bac2f0ea644f9e17581db09eb50
           cuisine, course, mood, diet,skills, 
          numserve, cooktime,
          instruction,ingredients,
@@ -78,8 +104,12 @@ function AddRecipe() {
                  "Content-Type":"application/json"
              },
              body: JSON.stringify({
+<<<<<<< HEAD
                 author,title,description,
                 traditional,
+=======
+                author,title,description,image,
+>>>>>>> 51507b2dc3a34bac2f0ea644f9e17581db09eb50
                  cuisine, course, mood, diet,skills, 
                 numserve, cooktime,
                 instruction,ingredients,
@@ -101,6 +131,7 @@ function AddRecipe() {
 
     }
 
+<<<<<<< HEAD
 
     // // handleSubmit for ingredients
     // const handleSubmit = (e) => {
@@ -109,6 +140,8 @@ function AddRecipe() {
     //     console.log("recipeInfo", recipeInfo)
     // };
 
+=======
+>>>>>>> 51507b2dc3a34bac2f0ea644f9e17581db09eb50
     //middleware
     
 
@@ -141,8 +174,19 @@ function AddRecipe() {
     },[]);
 
 
+    // const handelReset=()=>({
+    //     author:"", title:"", description:"",
+    //      image:"",
+    //      numserve:"", cooktime:"",
+    //      instruction:"",
+    //     ingredients:"",
+    //      kcal:"", fat:"", protein:"", carbs:"", sugar:"" , fibre:""
+    // });
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 51507b2dc3a34bac2f0ea644f9e17581db09eb50
   return (
     <div>
 
@@ -186,12 +230,13 @@ function AddRecipe() {
 
             <Form.Group controlId="formFile1" className="mb-3">
                 <Form.Label>Recipe Image</Form.Label>
-                <Form.Control type="file" />
+                <Form.Control type="file" name="image" onChange={imageUpload}/>
             </Form.Group>
 
             <hr></hr>
             <h2 class="heading2">Filters</h2>
             <Row>
+<<<<<<< HEAD
             <Form.Group md={4} as={Col} controlId="formGridState1">
                 <Form.Label>Traditional</Form.Label>
                 <Form.Select 
@@ -209,6 +254,10 @@ function AddRecipe() {
                 </Form.Group>
 
                 <Form.Group md={4} as={Col} controlId="formGridState2">
+=======
+
+                <Form.Group md={6} as={Col} controlId="formGridState2">
+>>>>>>> 51507b2dc3a34bac2f0ea644f9e17581db09eb50
                     <Form.Label>Cuisine</Form.Label>
                     <Form.Select 
                     //value={recipeInfo.cuisine}
@@ -219,6 +268,10 @@ function AddRecipe() {
                         <option value="America">American</option>
                         <option value="Chinese">Chinese</option>
                         <option value="French">French</option>
+<<<<<<< HEAD
+=======
+                        <option value="Indian">Indian</option>
+>>>>>>> 51507b2dc3a34bac2f0ea644f9e17581db09eb50
                         <option value="Italian">Italian</option>
                         <option value="Japanese">Japanese</option>
                         <option value="Korean">Korean</option>
@@ -228,7 +281,11 @@ function AddRecipe() {
                     </Form.Select>
                 </Form.Group>
 
+<<<<<<< HEAD
                 <Form.Group md={4} as={Col} controlId="formGridState3">
+=======
+                <Form.Group md={6} as={Col} controlId="formGridState3">
+>>>>>>> 51507b2dc3a34bac2f0ea644f9e17581db09eb50
                     <Form.Label>Course</Form.Label>
                     <Form.Select 
                     //value={recipeInfo.course}
@@ -238,8 +295,16 @@ function AddRecipe() {
                         <option value="Choose...">Choose...</option>
                         <option value="BreakFast">BreakFast</option>
                         <option value="Brunch">Brunch</option>
+<<<<<<< HEAD
                         <option value="Lunch">Lunch</option>
                         <option value="Snack">Snack</option>
+=======
+                        <option value="Dessert">Dessert</option>
+                        <option value="Drinks">Drinks</option>
+                        <option value="Lunch">Lunch</option>
+                        <option value="Snack">Snack</option>
+                        <option value="Soup-course">Soup-course</option>
+>>>>>>> 51507b2dc3a34bac2f0ea644f9e17581db09eb50
                         <option value="Dinner">Dinner</option>
                     </Form.Select>
                 </Form.Group>
@@ -273,8 +338,14 @@ function AddRecipe() {
                     <option value="Choose...">Choose...</option>
                     <option value="Low Fat">Low Fat</option>
                     <option value="Low Calorie">Low Calorie</option>
+<<<<<<< HEAD
                     <option value="Veg">Veg</option>
                     <option value="Vegan">Vegan</option>
+=======
+                    <option value="Vegetarian">Vegetarian</option>
+                    <option value="Low-salt">Low-salt</option>
+                    <option value="Healthy">Healthy</option>
+>>>>>>> 51507b2dc3a34bac2f0ea644f9e17581db09eb50
                 </Form.Select>
             </Form.Group>
 
@@ -323,13 +394,17 @@ function AddRecipe() {
                     onChange={handleInputs}
                     name="instruction"
                     as="textarea"
+<<<<<<< HEAD
                     placeholder="Leave a comment here"
+=======
+>>>>>>> 51507b2dc3a34bac2f0ea644f9e17581db09eb50
                     style={{ height: '100px' }}
                     />
                 </FloatingLabel>
             </div>
             <hr></hr>
             <h2 class="heading2">Ingredients</h2>
+<<<<<<< HEAD
             {/* { inputFields.map((inputFields, index) => (
                 <div key={index}>
                     <Row className="mb-3">
@@ -356,6 +431,19 @@ function AddRecipe() {
                 onClick ={() =>handleRemoveFields()}>
                     Remove Ingredient
                 </Button> */}
+=======
+            <div id="survey_options2">
+                <FloatingLabel controlId="floatingTextarea3">
+                    <Form.Control
+                    value={recipeInfo.ingredients}
+                    onChange={handleInputs}
+                    name="ingredients"
+                    as="textarea"
+                    style={{ height: '100px' }}
+                    />
+                </FloatingLabel>
+            </div>
+>>>>>>> 51507b2dc3a34bac2f0ea644f9e17581db09eb50
             <hr></hr>
             <h2 class="heading2">Nutrition</h2>
             <Row>
@@ -412,7 +500,7 @@ function AddRecipe() {
             <Button style={{margin:"10px"}} variant="success" onClick={PostData} type="submit">
                 Save
             </Button>
-            <Button style={{margin:"10px"}} variant="success" type="submit">
+                <Button style={{margin:"10px"}} variant="success" type="reset" onClick={() => setRecipeInfo(() => "")} >
                 Reset
             </Button>
         </Form>       

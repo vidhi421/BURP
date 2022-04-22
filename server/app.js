@@ -1,5 +1,6 @@
 const dotenv=require("dotenv");
 const express = require("express");
+const expressLayouts = require('express-ejs-layouts');
 const app = express();
 const mongoose=require("mongoose");
 const cookieParser = require('cookie-parser')
@@ -13,7 +14,7 @@ app.use(cookieParser())
 app.use(require('./router/auth'));
 
 const PORT=process.env.PORT;
-
+  
 app.get('/', (req,res)=>{
     res.send("hello from server");
 })

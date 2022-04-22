@@ -11,8 +11,11 @@ import Profile from "./Components/Profile"
 import RecipeInfo from "./Components/RecipeInfo"
 import LoginPage from "./Components/LoginPage"
 import AddRecipe from './Components/AddRecipe'
+<<<<<<< HEAD
 import FilterRecipe from './Components/FilterRecipes'
 import Ingredients from './Components/Ingredients';
+=======
+>>>>>>> 51507b2dc3a34bac2f0ea644f9e17581db09eb50
 import {
   BrowserRouter,
   Routes,
@@ -30,8 +33,12 @@ ReactDOM.render(
         <Route path="/Profile" element={<Profile />} />
         <Route path="/RecipeInfo" element={<RecipeInfo />} />
         <Route path="/AddRecipe" element={<AddRecipe />} />
+<<<<<<< HEAD
         <Route path="/FilterRecipe" element={<FilterRecipe />} />
         <Route path='/Ingredients' element={<Ingredients/>} />
+=======
+       
+>>>>>>> 51507b2dc3a34bac2f0ea644f9e17581db09eb50
     </Routes>
     <Footer/>
   </BrowserRouter>,

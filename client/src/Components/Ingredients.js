@@ -7,6 +7,7 @@ import { useState } from 'react'
 // import { DefaultContext } from 'react-icons'
 
 function Ingredients(){
+<<<<<<< HEAD
 
         // const[check, setCheck]=useState({
         //     author:"", ingredients:[]
@@ -21,15 +22,28 @@ function Ingredients(){
             // console.log("inputFields", inputFields); 
             
         };
+=======
+        const handleSubmit = (e) => {
+            e.preventDefault();
+            console.log("inputFields", inputFields); 
+        };
+
+>>>>>>> 51507b2dc3a34bac2f0ea644f9e17581db09eb50
         
         const [inputFields, setInputFields] = useState([
             { Ingredient1: ''}
         ]); 
 
+<<<<<<< HEAD
         let values;
         const handleChangeInput = (index,event) => {
             values = [...inputFields];
             values[index][event.target.name] = event.target.value;
+=======
+        const handleChangeInput = (index,event) => {
+            const values = [...inputFields];
+            values[index][event.target.name]  = event.target.value;
+>>>>>>> 51507b2dc3a34bac2f0ea644f9e17581db09eb50
             setInputFields(values);
         }
 
@@ -45,6 +59,7 @@ function Ingredients(){
     return(
         <Form style={{padding:"50px"}} 
         onSubmit={handleSubmit}
+<<<<<<< HEAD
         >   
             {/* <h2 class="heading2">Your name</h2>
                 <Form.Group md={6} as={Col} controlId="formGridEmail">
@@ -56,6 +71,9 @@ function Ingredients(){
                     type="text" 
                     placeholder="example01@gmail.com" />
                 </Form.Group> */}
+=======
+        >
+>>>>>>> 51507b2dc3a34bac2f0ea644f9e17581db09eb50
             <h2 class="heading2">Ingredients</h2>
             { inputFields.map((inputFields, index) => (
                 <div key={index}>

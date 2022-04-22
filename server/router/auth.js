@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const multer = require('multer');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const authenticate = require("../middleware/authenticate"); 
@@ -7,6 +8,18 @@ const authenticate = require("../middleware/authenticate");
 require('../db/conn');
 const User = require("../model/userSchema");
 const Recipeadd = require("../model/recipeSchema");
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'public/images')
+    },
+    filename: function (req, file, cb) {
+      cb(null, Date.now()+'_'+file.originalname)
+    }
+  })
+  
+  const upload = multer({ storage: storage })
+
 
 
 
@@ -123,21 +136,21 @@ router.post('/LoginPage',async (req,res) =>{
 
 //using promises
 
-router.post('/AddRecipe',authenticate,(req,res) => {
+router.post('/AddRecipe',upload.single('image'),authenticate,(req,res) => {
 
-   
+    let image= (req.file)?req.file.filename : null;
     
-    const{author,title,description,cuisine,mood,diet,course,numserve,cooktime,instruction,ingredients,kcal,fats,saturats,carbs,sugar}=req.body;
+    const{author,title,description,cuisine,mood,diet,skills,course,numserve,cooktime,instruction,ingredients,kcal,fat,protein,carbs,sugar,fibre}=req.body;
 
-    if(!author || !title || !description || !cuisine  || !mood  || !diet  || !course || !instruction || !ingredients){
+    if( !author || !title || !description || !ingredients || !skills || !cuisine  || !mood  || !course || !instruction ){
         return res.status(422).json({error:"fill the required fields!"});        
     }
 
-    const recipe = new Recipeadd({author,title,description,cuisine,mood,diet,course,numserve,cooktime,instruction,ingredients,kcal,fats,saturats,carbs,sugar});
+    const recipe = new Recipeadd({author,title,image,description,skills,ingredients,cuisine,mood,diet,course,numserve,cooktime,instruction,kcal,fat,protein,carbs,sugar,fibre});
 
     recipe.save().then(()=>{
-        res.status(201).json({message:"recipe added successfully"});
-    }).catch((err)=> res.status(500).json({error:"failed to add recipe"}));
+        console.log("recipe added!");
+    }).catch(err => {console.log(err);});
      
     res.send(req.rootUser);
     
