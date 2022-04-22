@@ -7,19 +7,29 @@ import { useState } from 'react'
 // import { DefaultContext } from 'react-icons'
 
 function Ingredients(){
+
+        // const[check, setCheck]=useState({
+        //     author:"", ingredients:[]
+        // })
+         
+        let name,value;
         const handleSubmit = (e) => {
             e.preventDefault();
-            console.log("inputFields", inputFields); 
+            name=e.target.name;
+            value=e.target.value;
+            console.log({...inputFields, [name]:value})
+            // console.log("inputFields", inputFields); 
+            
         };
-
         
         const [inputFields, setInputFields] = useState([
             { Ingredient1: ''}
         ]); 
 
+        let values;
         const handleChangeInput = (index,event) => {
-            const values = [...inputFields];
-            values[index][event.target.name]  = event.target.value;
+            values = [...inputFields];
+            values[index][event.target.name] = event.target.value;
             setInputFields(values);
         }
 
@@ -35,7 +45,17 @@ function Ingredients(){
     return(
         <Form style={{padding:"50px"}} 
         onSubmit={handleSubmit}
-        >
+        >   
+            {/* <h2 class="heading2">Your name</h2>
+                <Form.Group md={6} as={Col} controlId="formGridEmail">
+                    <Form.Label>Author</Form.Label>
+                    <Form.Control 
+                    value={check.name}
+                    onChange={}
+                    name="author"
+                    type="text" 
+                    placeholder="example01@gmail.com" />
+                </Form.Group> */}
             <h2 class="heading2">Ingredients</h2>
             { inputFields.map((inputFields, index) => (
                 <div key={index}>

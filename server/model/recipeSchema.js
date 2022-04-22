@@ -36,12 +36,12 @@ const recipeSchema = new mongoose.Schema({
     cooktime:{
         type:Number
     },
-    instruction:[
+    instruction:
         {
             type:String,
             required:true
         }
-    ],
+    ,
     ingredients:[
         {
             type:String,

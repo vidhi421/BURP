@@ -11,6 +11,8 @@ import Profile from "./Components/Profile"
 import RecipeInfo from "./Components/RecipeInfo"
 import LoginPage from "./Components/LoginPage"
 import AddRecipe from './Components/AddRecipe'
+import FilterRecipe from './Components/FilterRecipes'
+import Ingredients from './Components/Ingredients';
 import {
   BrowserRouter,
   Routes,
@@ -28,7 +30,8 @@ ReactDOM.render(
         <Route path="/Profile" element={<Profile />} />
         <Route path="/RecipeInfo" element={<RecipeInfo />} />
         <Route path="/AddRecipe" element={<AddRecipe />} />
-       
+        <Route path="/FilterRecipe" element={<FilterRecipe />} />
+        <Route path='/Ingredients' element={<Ingredients/>} />
     </Routes>
     <Footer/>
   </BrowserRouter>,

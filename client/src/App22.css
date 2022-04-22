@@ -1,0 +1,13 @@
+body{
+    font-family: 'Ramaraja', serif;
+    font-family: 'Roboto Slab', serif;
+}
+
+.overlayContent{
+    display:flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    color:black;
+    
+}

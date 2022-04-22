@@ -9,49 +9,18 @@ import { useNavigate } from 'react-router-dom'
 
 function AddRecipe() {
 
-    const navigate=useNavigate()
-
-    // //ingredients:-
-    // const [inputFields, setInputFields] = useState([
-    //     { Ingredient1: ''}
-    // ]); 
-
-    // const handleChangeInput = (index,event) => {
-    //     console.log(event)
-    //     const values = [...inputFields];
-    //     values[index][event.target.name]  = event.target.value;
-    //     setInputFields(values);
-    // }
-
-    // const handleAddFields=()=>{
-    //     setInputFields([...inputFields, { Ingredient1:"" }])
-    // }
-
-    // const handleRemoveFields=()=>{
-    //     const values=[...inputFields];
-    //     //values.splice(index,1);
-    //     setInputFields(values);
-    // }
-
     const [recipeInfo, setRecipeInfo]=useState({
-        author:"", title:"", description:"",
-         //image:"",
-         traditional:"",
-          cuisine:"", course:"", mood:"", diet:"",skills:"", 
-         numserve:"", cooktime:"",
-         instruction:"",
-        ingredients: "",
+         author:"", title:"", description:"",
+        //   image:"",
+         traditional:"", cuisine:"", course:"", moods:"", diet:"",skills:"", 
+         servings:"", time:"",
+         instructions:"",
+         ingredients:"",
          kcal:"", fat:"", protein:"", carbs:"", sugar:"" , fibre:""
     });
 
     
-    // const imageUpload=(event)=>{
-    //     console.log(event.target.files[0]);
-    //     setRecipeInfo({...recipeInfo,[event.target.name]:event.target.files[0]});
-    // }
-    
 
-    
     //for the rest fields
     let name,value;
     const handleInputs=(e)=>{
@@ -63,54 +32,8 @@ function AddRecipe() {
         setRecipeInfo({...recipeInfo, [name]:value});
     }
 
-    const PostData = async(e)=>{
-        e.preventDefault();
-        const{author,title,description,
-         traditional,
-          cuisine, course, mood, diet,skills, 
-         numserve, cooktime,
-         instruction,ingredients,
-         kcal, fat, protein, carbs, sugar , fibre}=recipeInfo;
-
-         const res = await fetch("/AddRecipe",{
-             method:"POST",
-             headers:{
-                 "Content-Type":"application/json"
-             },
-             body: JSON.stringify({
-                author,title,description,
-                traditional,
-                 cuisine, course, mood, diet,skills, 
-                numserve, cooktime,
-                instruction,ingredients,
-                kcal, fat, protein, carbs, sugar , fibre
-             })
-         });
-
-         const data=await res.json();
-
-         if(data.status===422 || !data){
-             window.alert("invalid");
-             console.log("invalid");
-         } else{
-            window.alert("recipe added!");
-            console.log("recipe added!");
-
-            navigate("/Profile");
-         }
-
-    }
-
-
-    // // handleSubmit for ingredients
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     // console.log("inputFields", inputFields); 
-    //     console.log("recipeInfo", recipeInfo)
-    // };
-
     //middleware
-    
+    const navigate=useNavigate()
 
     const  callAddrecipe = async () =>{
         try{
@@ -141,14 +64,12 @@ function AddRecipe() {
     },[]);
 
 
-
-
   return (
     <div>
 
         <Form  
-         method="POST" 
-        //onChange={handleSubmit}
+        // method="POST" 
+        onChange={handleSubmit}
         style={{padding:"50px"}}>
             <h1 style={{ marginBottom:"20px"}}>New Recipe</h1>
             <h2 class="heading2">Details</h2>
@@ -195,7 +116,7 @@ function AddRecipe() {
             <Form.Group md={4} as={Col} controlId="formGridState1">
                 <Form.Label>Traditional</Form.Label>
                 <Form.Select 
-                //value={recipeInfo.traditional}
+                value={recipeInfo.traditional}
                 onChange={handleInputs}
                 name="traditional"
                 defaultValue="Choose...">
@@ -211,12 +132,13 @@ function AddRecipe() {
                 <Form.Group md={4} as={Col} controlId="formGridState2">
                     <Form.Label>Cuisine</Form.Label>
                     <Form.Select 
-                    //value={recipeInfo.cuisine}
+                    value={recipeInfo.cuisine}
                     onChange={handleInputs}
                     name="cuisine"
                     defaultValue="Choose...">
                         <option value="Choose...">Choose...</option>
                         <option value="America">American</option>
+                        
                         <option value="Chinese">Chinese</option>
                         <option value="French">French</option>
                         <option value="Italian">Italian</option>
@@ -231,7 +153,7 @@ function AddRecipe() {
                 <Form.Group md={4} as={Col} controlId="formGridState3">
                     <Form.Label>Course</Form.Label>
                     <Form.Select 
-                    //value={recipeInfo.course}
+                    value={recipeInfo.course}
                     onChange={handleInputs}
                     name="course"
                     defaultValue="Choose...">
@@ -250,7 +172,7 @@ function AddRecipe() {
             <Form.Group md={4} as={Col} controlId="formGridState4">
                 <Form.Label>Mood</Form.Label>
                 <Form.Select 
-                //value={recipeInfo.mood}
+                value={recipeInfo.mood}
                 onChange={handleInputs}
                 name="mood"
                 defaultValue="Choose...">
@@ -266,7 +188,7 @@ function AddRecipe() {
             <Form.Group md={4} as={Col} controlId="formGridState5">
                 <Form.Label>Diet</Form.Label>
                 <Form.Select 
-                //value={recipeInfo.diet}
+                value={recipeInfo.diet}
                 onChange={handleInputs}
                 name="diet"
                 defaultValue="Choose...">
@@ -281,7 +203,7 @@ function AddRecipe() {
             <Form.Group md={4} as={Col} controlId="formGridState6">
                 <Form.Label>Skills</Form.Label>
                 <Form.Select 
-                //value={recipeInfo.skills}
+                value={recipeInfo.skills}
                 onChange={handleInputs}
                 name="skills"
                 defaultValue="Choose...">
@@ -298,18 +220,17 @@ function AddRecipe() {
             <Row>
                 <Col md={6}>
                     <Form.Label>No. of Servings</Form.Label>
-                    <Form.Control 
-                    value={recipeInfo.numserve}
+                    <Form.Control value={recipeInfo.servings}
                     onChange={handleInputs}
-                    name="numserve"
+                    name="servings"
                     placeholder="Serves" />
                 </Col>
                 <Col md={6}>
                     <Form.Label>Cooking Time</Form.Label>
                     <Form.Control 
-                    value={recipeInfo.cooktime}
+                    value={recipeInfo.time}
                     onChange={handleInputs}
-                    name="cooktime"
+                    name="time"
                     placeholder="Cooking Time" />
                 </Col>
             </Row>
@@ -319,17 +240,27 @@ function AddRecipe() {
             <div id="survey_options1">
                 <FloatingLabel controlId="floatingTextarea2">
                     <Form.Control
-                    value={recipeInfo.instruction}
+                    value={recipeInfo.instructions}
                     onChange={handleInputs}
-                    name="instruction"
+                    name="instructions"
                     as="textarea"
-                    placeholder="Leave a comment here"
                     style={{ height: '100px' }}
                     />
                 </FloatingLabel>
             </div>
             <hr></hr>
             <h2 class="heading2">Ingredients</h2>
+            <div id="survey_options2">
+                <FloatingLabel controlId="floatingTextarea3">
+                    <Form.Control
+                    value={recipeInfo.ingredients}
+                    onChange={handleInputs}
+                    name="ingredients"
+                    as="textarea"
+                    style={{ height: '100px' }}
+                    />
+                </FloatingLabel>
+            </div>
             {/* { inputFields.map((inputFields, index) => (
                 <div key={index}>
                     <Row className="mb-3">
@@ -347,13 +278,13 @@ function AddRecipe() {
                 <Button 
                 variant="secondary" 
                 style={{margin:"10px"}} 
-                onClick ={() =>handleAddFields()} >
+                onClick ={handleAddFields} >
                     Add Ingredient 
                 </Button>
                 <Button 
                 variant="secondary" 
                 style={{margin:"10px"}} 
-                onClick ={() =>handleRemoveFields()}>
+                onClick ={handleRemoveFields}>
                     Remove Ingredient
                 </Button> */}
             <hr></hr>
@@ -409,7 +340,7 @@ function AddRecipe() {
                 </Col>
             </Row>
             <hr></hr>
-            <Button style={{margin:"10px"}} variant="success" onClick={PostData} type="submit">
+            <Button style={{margin:"10px"}} variant="success" onChange={handleSubmit}type="submit">
                 Save
             </Button>
             <Button style={{margin:"10px"}} variant="success" type="submit">

@@ -18,7 +18,7 @@ function CardSlider() {
 
   return (
     <div >
-      <Carousel style={{marginBottom:"20px",height:"600px"}}>
+      <Carousel style={{marginBottom:"20px"}}>
         <Carousel.Item style={{padding:"25px"}}>
           <CardGroup>
             <Card style={{padding:"15px"}}>

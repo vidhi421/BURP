@@ -1,0 +1,107 @@
+[
+    {
+        "RId":"1",
+        "Title":"Pizza",
+        "Description":"Cheese and Veggies over flattened dough",
+        "Image":"./pic2.jpg",
+        "AuthorUserName": "FoodScholar",
+        "Likes":"0",
+        "Ingredients":[
+            "","","",""
+        ],
+        "Instructions":"",
+        "Tags":["","","",""],
+        "comments":[]
+
+    },
+    {
+        "RId":"2",
+        "Title":"Chole",
+        "Description":"Spicy curry with onions on top",
+        "Image":"./pic2.jpg",
+        "AuthorUserName": "WorldClassChef",
+        "Likes":"0",
+        "Ingredients":[
+            "","","",""
+        ],
+        "Instructions":"",
+        "Tags":["","","",""],
+        "comments":[]
+
+    },
+    {
+        "RId":"3",
+        "Title":"Chole",
+        "Description":"Spicy curry with onions on top",
+        "Image":"./pic2.jpg",
+        "AuthorUserName": "WorldClassChef",
+        "Likes":"0",
+        "Ingredients":[
+            "","","",""
+        ],
+        "Instructions":"",
+        "Tags":["","","",""],
+        "comments":[]
+
+    },
+    {
+        "RId":"4",
+        "Title":"Chole",
+        "Description":"Spicy curry with onions on top",
+        "Image":"./bfg.jpg",
+        "AuthorUserName": "WorldClassChef",
+        "Likes":"0",
+        "Ingredients":[
+            "","","",""
+        ],
+        "Instructions":"",
+        "Tags":["","","",""],
+        "comments":[]
+
+    },
+    {
+        "RId":"5",
+        "Title":"Chole",
+        "Description":"Spicy curry with onions on top",
+        "Image":"./momos.jpg",
+        "AuthorUserName": "WorldClassChef",
+        "Likes":"0",
+        "Ingredients":[
+            "","","",""
+        ],
+        "Instructions":"",
+        "Tags":["","","",""],
+        "comments":[]
+
+    },
+    {
+        "RId":"5",
+        "Title":"Momos",
+        "Description":"It's a north-Indian dish. It varies according to the taste all over India.",
+        "Image":"./momos.jpg",
+        "AuthorUserName": "WorldClassChef",
+        "Likes":"0",
+        "Ingredients":[
+            "","","",""
+        ],
+        "Instructions":"",
+        "Tags":["","","",""],
+        "comments":[]
+
+    },
+    {
+        "RId":"10",
+        "Title":"pav bhaji",
+        "Description":"Spicy curry with onions on top",
+        "Image":"./pic1.jpg",
+        "AuthorUserName": "Surbhi",
+        "Likes":"10",
+        "Ingredients":[
+            "","","",""
+        ],
+        "Instructions":"",
+        "Tags":["","","",""],
+        "comments":[]
+
+    }
+]
