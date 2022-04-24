@@ -31,7 +31,7 @@
     },
     {
         "RId":"3",
-        "Title":"Chole",
+        "Title":"Chutney",
         "Description":"Spicy curry with onions on top",
         "Image":"./pic2.jpg",
         "AuthorUserName": "WorldClassChef",
@@ -46,7 +46,7 @@
     },
     {
         "RId":"4",
-        "Title":"Chole",
+        "Title":"Bharta",
         "Description":"Spicy curry with onions on top",
         "Image":"./bfg.jpg",
         "AuthorUserName": "WorldClassChef",

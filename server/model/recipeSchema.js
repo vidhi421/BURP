@@ -51,20 +51,11 @@ const recipeSchema = new mongoose.Schema({
             required:true
         }
     ,
-<<<<<<< HEAD
-    ingredients:[
-        {
-            type:String,
-            required:true
-        }
-    ],
-=======
     ingredients:
     {
         type:String,
         required:true
     },
->>>>>>> 51507b2dc3a34bac2f0ea644f9e17581db09eb50
     kcal:{
         type:Number
     },

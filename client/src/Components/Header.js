@@ -105,13 +105,9 @@ function Header() {
             </Nav>
             
             <Form className="d-flex">
-                <FormControl
-                type="search"
-                placeholder="Search"
-                className="me-2"
-                aria-label="Search"
-                />
-                <Button variant="outline-success">Search</Button>
+                <Link to='./FilterRecipe'>
+                    <Button variant="outline-success">Search</Button>
+                </Link>
             </Form>
             <div>
                 {/* <Button style={{marginLeft:"25px", marginRight:"3px"}} variant="outline-success">Sign Up</Button> */}

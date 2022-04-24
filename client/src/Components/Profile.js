@@ -5,6 +5,9 @@ import Card from 'react-bootstrap/Card'
 import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
 import Button from 'react-bootstrap/Button'
+
+import Add from './Add'
+import '../App.css'
 import { useNavigate } from 'react-router-dom'
 import { useEffect , useState } from 'react';
 //import HeaderLoggedIn from "../../../BURP/src/Components/HeaderLoggedIn.js"
@@ -16,6 +19,7 @@ function Profile() {
     const navigate=useNavigate();
     const [userData , setUserData] = useState({}); 
 
+    const[profile, setProfile]=useState()
     const  callProfile = async () =>{
         try{
             const res = await fetch('/Profile',{
@@ -49,7 +53,7 @@ function Profile() {
     return (
         <form method="GET">
         <div>
-            {/* <HeaderLoggedIn/> */}
+            <Add/>
             <Container>
                 <div style={{display:"flex" ,justifyContent:"space-between", marginTop:"10px"}}>
                     <h1 >Welcome To BURP!</h1>
@@ -57,12 +61,18 @@ function Profile() {
                 </div>
                 
                 <hr></hr>
-                <Row style={{margin:"20px"}}>
-                    <Col md={3} style={{ padding:"7px" }}>
-                        <img style={{height:"30vh", borderRadius:"50%"}} src="./user.png" alt="profile"/>
+                <Row style={{margin:"20px", display:"flex", gap:"10px"}}>
+                    <Col >
+                        <div className="imageContainer">
+                            <img style={{position:"absolute",height:"100%",borderRadius:"50%", display:"inline-block"}} 
+                            src="./user.png" alt="profile"/>
+                            <div class="imageOverlay">
+                                <Button style={{margin:"6px"}}>Update Profile</Button>
+                            </div>
+                        </div>
                     </Col>
                     
-                    <Col md={9} style={{padding:"10px", border:"2px solid grey", borderRadius:" 10px"}}>
+                    <Col lg={9} style={{padding:"10px", border:"2px solid grey", borderRadius:" 10px"}}>
                         <h2>{userData.username}</h2>
                         <br/>
                         <Row style={{margin:"10px"}}>
@@ -90,9 +100,9 @@ function Profile() {
                                 <Card.Text>
                                 Momos are a popular street food in northern parts of India. These are also known as Dim Sum and are basically dumplings made from flour with a savory stuffing.
                                 </Card.Text>
-                                <Card.Footer style={{textAlign:"right"}}>
+                                {/* <Card.Footer style={{textAlign:"right"}}>
                                     <AiOutlineLike/>{' '}<AiOutlineDislike/>
-                                </Card.Footer>
+                                </Card.Footer> */}
                             </Card.Body>
                             
                         </Card>
@@ -123,9 +133,9 @@ function Profile() {
                                     The Alfredo Pasta is an Italian pasta dish made using fresh pasta, vegetables, chicken pieces combined with butter, cream and cheese.
                                 </Card.Text>
                             </Card.Body>
-                            <Card.Footer style={{textAlign:"right"}}>
+                            {/* <Card.Footer style={{textAlign:"right"}}>
                                 <AiOutlineLike/>{' '}<AiOutlineDislike/>
-                            </Card.Footer>
+                            </Card.Footer> */}
                         </Card>
                         {/* <Card  style={{ width: '18rem' }}>
                             <Card.Img variant="top" src="Alfredo.jpg" alt="userImage"/>

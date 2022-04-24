@@ -1,6 +1,5 @@
 const dotenv=require("dotenv");
 const express = require("express");
-const expressLayouts = require('express-ejs-layouts');
 const app = express();
 const mongoose=require("mongoose");
 const cookieParser = require('cookie-parser')
