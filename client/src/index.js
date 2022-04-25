@@ -11,12 +11,15 @@ import Profile from "./Components/Profile"
 import RecipeInfo from "./Components/RecipeInfo"
 import LoginPage from "./Components/LoginPage"
 import AddRecipe from './Components/AddRecipe'
+
 import {
   BrowserRouter,
   Routes,
   Route,
   // Link
 } from "react-router-dom";
+
+require('dotenv').config();
 
 ReactDOM.render(
   <BrowserRouter>

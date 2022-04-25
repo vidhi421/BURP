@@ -1,7 +1,7 @@
 import Carousel from 'react-bootstrap/Carousel';
 import Card from 'react-bootstrap/Card';
 import CardGroup from 'react-bootstrap/CardGroup';
-// import { useState } from 'react'
+ import { useEffect,useState } from 'react'
 import { Link } from 'react-router-dom'
 
 //icons
@@ -10,68 +10,118 @@ import { AiOutlineLike } from 'react-icons/ai'
 // import { BiCommentDetail } from 'react-icons/bi'
 // import { FiEdit } from 'react-icons/fi'
 
+//require('dotenv').config();
 
 function CardSlider() {
-  // const [likes,setLikes]=useState(0);
-  
-  // const [dislikes,setDislikes]=useState(0);
+
+  const [userData , setUserData] = useState([]); 
+
+  // const  callRecipes = async () =>{
+  //     try{
+  //         const res = await fetch('/allrecipe',{
+  //             method: "GET",
+  //             headers:{
+  //                 Accept:"application/json",
+  //                 "Content-type":"application/json"
+  //             },
+  //             credentials:"include"
+  //         });
+
+  //         const data = await res.json();
+  //         console.log(data);
+  //         setUserData(data); 
+
+  //         if(!res.status === 200){
+  //             const error = new Error(res.error);
+  //             throw error;
+  //         }
+  //     }catch(err){
+  //         console.log(err);
+  //     }
+  // }
+
+  useEffect(() => {
+      //callRecipes();
+      fetch('/allrecipe')
+      .then(res=>res.json())
+      .then(result=>{
+        //console.log(result.recipes[0].image)
+        setUserData(result.recipes)
+      })
+  },[]);
+
 
   return (
-    <div >
-      <Carousel style={{marginBottom:"20px",height:"600px"}}>
+    <div>
+      
+       
+            <Carousel style={{marginBottom:"20px",height:"600px"}}>
+            {
+          userData.map((item)=>{
+          return(
         <Carousel.Item style={{padding:"25px"}}>
           <CardGroup>
+         
             <Card style={{padding:"15px"}}>
               <Card.Img  style={{objectFit: "cover",
               backgroundRepeat: "no-repeat",
               backgroundPosition: "center center",
-              height: "35vh"}}  variant="top" src="./Cheesy_Vada_Pav_Recipe.jpg" />
+              //http://localhost:7000/public/images/1650821738103_jjk.jpg
+              height: "35vh"}}  variant="top" src={process.env.REACT_APP_IMAGE_PATH+item.image}/>
               <Card.Body>
-                <Card.Title>Cheesy vada pav</Card.Title>
+              <Card.Title>{item.title}</Card.Title>
                 <Card.Text>
-                  It is a Maharashtrian recipe. It is served as cheese vada wrapped inside buns(pav).
+                {item.description}
                 </Card.Text>
               </Card.Body>
               <Card.Footer style={{textAlign:"right"}}>
                 <AiOutlineLike/>{' '}<AiOutlineDislike/>
               </Card.Footer>
             </Card>
-              <Card style={{padding:"15px"}}>
-                <Card.Img style={{objectFit: "cover",
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "center center",
-                height: "35vh"}}  variant="top" src="./momos.jpg" />
-                <Card.Body>
-                <Link to="./RecipeInfo" style={{color:"black",textDecoration:"none"}} ><Card.Title>Momos</Card.Title></Link>
-                  <Card.Text>
-                    Momos are a popular street food in northern parts of India. These are also known as Dim Sum and are basically dumplings made from flour with a savory stuffing.
-                  </Card.Text>
-                </Card.Body>
-                <Card.Footer style={{textAlign:"right"}}>
-                  <AiOutlineLike/>{' '}<AiOutlineDislike/>
-                </Card.Footer>
-              </Card>
+            {/* // <Card style={{padding:"15px"}}>
+            //    <Card.Img style={{objectFit: "cover",
+            //     backgroundRepeat: "no-repeat",
+            //     backgroundPosition: "center center",
+            //     height: "35vh"}}  variant="top" src={item.image} />
+            //     <Card.Body>
+            //     <Link to="./RecipeInfo" style={{color:"black",textDecoration:"none"}} ><Card.Title>{item.title}</Card.Title></Link>
+            //       <Card.Text>
+            //       {item.description}
+            //       </Card.Text>
+            //     </Card.Body>
+            //     <Card.Footer style={{textAlign:"right"}}>
+            //       <AiOutlineLike/>{' '}<AiOutlineDislike/>
+            //     </Card.Footer>
+            //   </Card>
             
-            <Card style={{padding:"15px"}}>
-              <Card.Img 
-               style={{objectFit: "cover",
-               backgroundRepeat: "no-repeat",
-               backgroundPosition: "center center",
-               height: "35vh"}} 
-               variant="top" src="./Alfredo.jpeg" />
-              <Card.Body>
-                <Card.Title>Alfredo Pasta</Card.Title>
-                <Card.Text>
-                  The Alfredo Pasta is an Italian pasta dish made using fresh pasta, vegetables, chicken pieces combined with butter, cream and cheese.
-                </Card.Text>
-              </Card.Body>
-              <Card.Footer style={{textAlign:"right"}}>
-                <AiOutlineLike/>{' '}<AiOutlineDislike/>
-              </Card.Footer>
-            </Card>
+            // <Card style={{padding:"15px"}}>
+            //   <Card.Img 
+            //    style={{objectFit: "cover",
+            //    backgroundRepeat: "no-repeat",
+            //    backgroundPosition: "center center",
+            //    height: "35vh"}} 
+            //    variant="top" src={item.image} />
+            //   <Card.Body>
+            //     <Card.Title>{item.title}</Card.Title>
+            //     <Card.Text>
+            //     {item.description}
+            //     </Card.Text>
+            //   </Card.Body>
+            //   <Card.Footer style={{textAlign:"right"}}>
+            //     <AiOutlineLike/>{' '}<AiOutlineDislike/>
+            //   </Card.Footer>
+            // </Card>
+          //    )
+          //   })
+          // } */}
           </CardGroup>
         </Carousel.Item>
-        <Carousel.Item style={{padding:"25px",height:"500px"}}>
+        )
+        })}
+        </Carousel> 
+         
+      
+        {/* <Carousel.Item style={{padding:"25px",height:"500px"}}>
           <CardGroup>
             <Card style={{padding:"15px"}}>
               <Card.Img style={{objectFit: "cover",
@@ -120,59 +170,9 @@ function CardSlider() {
               </Card.Footer>
             </Card>
           </CardGroup>
-        </Carousel.Item>
-        {/* <Carousel.Item style={{padding:"25px",height:"500px"}}>
-          <CardGroup>
-            <Card style={{padding:"15px"}}>
-              <Card.Img style={{objectFit: "cover",
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: "center center",
-              height: "35vh"}}  variant="top" src="pic2.jpg" />
-              <Card.Body>
-                <Card.Title>Card title</Card.Title>
-                <Card.Text>
-                  food
-                </Card.Text>
-              </Card.Body>
-              <Card.Footer style={{textAlign:"right"}}>
-                <AiOutlineLike/>{' '}<AiOutlineDislike/>
-              </Card.Footer>
-            </Card>
-            <Card style={{padding:"15px"}}>
-              <Card.Img style={{objectFit: "cover",
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: "center center",
-              height: "35vh"}}  variant="top" src="pic2.jpg" />
-              <Card.Body>
-                <Card.Title>Card title</Card.Title>
-                <Card.Text>
-                  This card has supporting text below as a natural lead-in to additional
-                  content.{' '}
-                </Card.Text>
-              </Card.Body>
-              <Card.Footer style={{textAlign:"right"}}>
-                <AiOutlineLike/>{' '}<AiOutlineDislike/>
-              </Card.Footer>
-            </Card>
-            <Card style={{padding:"15px"}}>
-              <Card.Img style={{objectFit: "cover",
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: "center center",
-              height: "35vh"}}  variant="top" src="pic2.jpg" />
-              <Card.Body>
-                <Card.Title>Card title</Card.Title>
-                <Card.Text>
-                  This is a wider card with supporting text below as a natural lead-in to
-                  additional content.
-                </Card.Text>
-              </Card.Body>
-              <Card.Footer style={{textAlign:"right"}}>
-                <AiOutlineLike/>{' '}<AiOutlineDislike/>
-              </Card.Footer>
-            </Card>
-          </CardGroup>
         </Carousel.Item> */}
-      </Carousel>    
+      
+        
     </div>
   );
 }

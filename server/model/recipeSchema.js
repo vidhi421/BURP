@@ -1,4 +1,5 @@
 const mongoose=require('mongoose');
+const {ObjectId}=mongoose.Schema.Types
 
 const recipeSchema = new mongoose.Schema({
     author:{
@@ -16,10 +17,6 @@ const recipeSchema = new mongoose.Schema({
     image:{
         type:String
     },
-    // traditional:{
-    //     type:String,
-    //     required: true
-    // },
     cuisine:{
         type:String,
         required: true
@@ -73,6 +70,10 @@ const recipeSchema = new mongoose.Schema({
     },
     fibre:{
         type:Number
+    },
+    postedBy:{
+        type: ObjectId,
+        ref: "USER"
     }
 })
 

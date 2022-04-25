@@ -8,6 +8,7 @@ const cookieParser = require('cookie-parser')
 dotenv.config({path:'./config.env'});
 require('./db/conn');
 
+app.use('/public',express.static('public'));
 app.use(express.json());
 app.use(cookieParser())
 //link router files

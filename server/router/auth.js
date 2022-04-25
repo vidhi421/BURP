@@ -143,19 +143,35 @@ router.post('/AddRecipe',upload.single('image'),authenticate,(req,res) => {
     const{author,title,description,cuisine,mood,diet,skills,course,numserve,cooktime,instruction,ingredients,kcal,fat,protein,carbs,sugar,fibre}=req.body;
 
     if( !author || !title || !description || !ingredients || !skills || !cuisine  || !mood  || !course || !instruction ){
-        return res.status(422).json({error:"fill the required fields!"});        
+        return  res.status(422).json({error:"fill the required fields!"});        
     }
-
-    const recipe = new Recipeadd({author,title,image,description,skills,ingredients,cuisine,mood,diet,course,numserve,cooktime,instruction,kcal,fat,protein,carbs,sugar,fibre});
+    req.rootUser.password=undefined
+    req.rootUser.cpassword=undefined
+    const recipe = new Recipeadd({author,title,image,description,skills,ingredients,cuisine,mood,diet,course,numserve,cooktime,instruction,kcal,fat,protein,carbs,sugar,fibre,postedBy:req.rootUser});
 
     recipe.save().then(()=>{
         console.log("recipe added!");
     }).catch(err => {console.log(err);});
+
+    
+
      
     res.send(req.rootUser);
     
   
 })  
+
+router.get('/allrecipe',(req,res)=>{
+    Recipeadd.find()
+    .populate("postedBy","_id username")
+    .then(recipes=>{
+        res.json({recipes})
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+})
+
 
 router.get('/Profile', authenticate ,(req,res) => {
     console.log("hello profile");
