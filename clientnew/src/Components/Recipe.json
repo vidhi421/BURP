@@ -1,0 +1,122 @@
+[
+    {
+        "RId":"1",
+        "Title":"Pizza",
+        "Description":"a dish made typically of flattened bread dough spread with a savory mixture",
+        "Image":"./pizza.jpg",
+        "AuthorUserName": "FoodScholar",
+        "Likes":"0",
+        "Ingredients":[
+            "","","",""
+        ],
+        "Instructions":"",
+        "Tags":["","","",""],
+        "comments":[]
+
+    },
+    {
+        "RId":"2",
+        "Title":"Chole",
+        "Description":"Chole masala is a popular Punjabi dish where chickpeas are simmered in a spicy & tangy gravy.",
+        "Image":"./Cholay.jpg",
+        "AuthorUserName": "WorldClassChef",
+        "Likes":"0",
+        "Ingredients":[
+            "","","",""
+        ],
+        "Instructions":"",
+        "Tags":["","","",""],
+        "comments":[]
+
+    },
+    {
+        "RId":"3",
+        "Title":"Cheesy Vada Pav",
+        "Description":"Vada pao, is a vegetarian fast food dish native to the state of Maharashtra.",
+        "Image":"./Cheesy_Vada_Pav_Recipe.jpg",
+        "AuthorUserName": "WorldClassChef",
+        "Likes":"0",
+        "Ingredients":[
+            "","","",""
+        ],
+        "Instructions":"",
+        "Tags":["","","",""],
+        "comments":[]
+
+    },
+    {
+        "RId":"4",
+        "Title":"Chicken Nuggets",
+        "Description": "A chicken nugget is a food product consisting of a small piece of deboned chicken meat that is breaded or battered, then deep-fried or baked",
+        "Image":"./chiken-nuggets.jpg",
+        "AuthorUserName": "WorldClassChef",
+        "Likes":"0",
+        "Ingredients":[
+            "","","",""
+        ],
+        "Instructions":"",
+        "Tags":["","","",""],
+        "comments":[]
+
+    },
+    {
+        "RId":"5",
+        "Title":"Gulab Jamun",
+        "Description":"Gulab jamun is an Indian dessert of fried dough balls that are soaked in a sweet, sticky sugar syrup.",
+        "Image":"./gulab-jamun.jpg",
+        "AuthorUserName": "WorldClassChef",
+        "Likes":"0",
+        "Ingredients":[
+            "","","",""
+        ],
+        "Instructions":"",
+        "Tags":["","","",""],
+        "comments":[]
+
+    },
+    {
+        "RId":"6",
+        "Title":"Momos",
+        "Description":"It's a north-Indian dish. It varies according to the taste all over India.",
+        "Image":"./momos.jpg",
+        "AuthorUserName": "WorldClassChef",
+        "Likes":"0",
+        "Ingredients":[
+            "","","",""
+        ],
+        "Instructions":"",
+        "Tags":["","","",""],
+        "comments":[]
+
+    },
+    {
+        "RId":"7",
+        "Title":"Idli",
+        "Description":"Idli Sambar is a hearty, satisfying, comforting and a healthy meal of soft fluffy idlis served with savory, spiced and lightly tangy sambar",
+        "Image":"./idli.jpg",
+        "AuthorUserName": "Surbhi",
+        "Likes":"10",
+        "Ingredients":[
+            "","","",""
+        ],
+        "Instructions":"",
+        "Tags":["","","",""],
+        "comments":[]
+
+    },
+    {
+        "RId":"8",
+        "Title":"Pav Bhaji",
+        "Description":"Pav bhaji is a fast food dish from India consisting of a thick vegetable curry served with a soft bread roll",
+        "Image":"./pav_bhaji.jpg",
+        "AuthorUserName": "Surbhi",
+        "Likes":"10",
+        "Ingredients":[
+            "","","",""
+        ],
+        "Instructions":"",
+        "Tags":["","","",""],
+        "comments":[]
+
+    }
+]

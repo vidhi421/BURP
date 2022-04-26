@@ -1,0 +1,86 @@
+*{
+    
+    
+
+}
+body{
+    font-family: 'Ramaraja', serif;
+    font-family: 'Roboto Slab', serif;
+    /* background-image: url("C:\Users\Lenovo\Desktop\BURP\clientnew\src\background_o.jpg"); */
+    /* background-color: #ccf0e0; */
+}
+
+
+/* SliderImages */
+.overlayContent{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+}
+
+.cardImageOverlay{
+    position:absolute;
+    height:100%;
+    width:100%; 
+    backdrop-filter:blur(5px);
+    /* border-radius:50%;  */ 
+    /* background: rgba(96, 91, 91, 0.6); */
+    /* display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; */
+    /* opacity:0; */
+}
+
+/* .cardImageOverlay--blur{
+    background: rgba(33, 32, 32, 0.6);
+    backdrop-filter:blur(5px);
+
+} */
+
+/* Profile.js */
+.imageContainer{
+    position:relative;
+    height:30vh;
+    width:100%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius:50%;
+}
+
+.imageOverlay{
+    position:absolute;
+    height:30vh;
+    object-fit: cover;
+    width:77%;
+    border-radius:50%;
+    background: rgba(0, 0, 0, 0.6);
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity:0;
+    transition: opacity 0.25s;
+}
+
+.imageOverlay>*{
+    transform:translateY(20px);
+    transition: transform .25s;
+}
+
+.imageOverlay:hover{
+    opacity:1;
+}
+
+.imageOverlay:hover >*{
+    transform:translateY(0);
+    /* transition: transform .25s; */
+}
+
+.imageOverlay--blur{
+    backdrop-filter:blur(5px);
+}

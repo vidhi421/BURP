@@ -7,7 +7,8 @@ import Tab from 'react-bootstrap/Tab'
 import Button from 'react-bootstrap/Button'
 import { useNavigate } from 'react-router-dom'
 import { useEffect , useState } from 'react';
-//import HeaderLoggedIn from "../../../BURP/src/Components/HeaderLoggedIn.js"
+import '../App.css'
+import Add from  './Add.js'
 
 import { AiOutlineDislike } from 'react-icons/ai'
 import { AiOutlineLike } from 'react-icons/ai'
@@ -16,6 +17,7 @@ function Profile() {
     const navigate=useNavigate();
     const [userData , setUserData] = useState({}); 
 
+    const[myPost, setPost]=useState([]);
     const  callProfile = async () =>{
         try{
             const res = await fetch('/Profile',{
@@ -41,15 +43,38 @@ function Profile() {
         }
     }
 
+
+    const  MyRecipes = async () =>{
+        try{
+            const res = await fetch('/myrecipe',{
+                method: "GET",
+                headers:{
+                    Accept:"application/json",
+                    "Content-type":"application/json"
+                },
+                credentials:"include"
+            });
+
+            const data = await res.json();
+            console.log(data);
+            // setPost(data);
+            setPost(data.recipes); 
+
+        }catch(err){
+            console.log(err);
+        }
+    }
+
     useEffect(() => {
         callProfile();
+        MyRecipes();
     },[]);
 
 
     return (
         <form method="GET">
         <div>
-            {/* <HeaderLoggedIn/> */}
+            <Add/>
             <Container>
                 <div style={{display:"flex" ,justifyContent:"space-between", marginTop:"10px"}}>
                     <h1 >Welcome To BURP!</h1>
@@ -57,12 +82,18 @@ function Profile() {
                 </div>
                 
                 <hr></hr>
-                <Row style={{margin:"20px"}}>
-                    <Col md={3} style={{ padding:"7px" }}>
-                        <img style={{height:"30vh", borderRadius:"50%"}} src="./user.png" alt="profile"/>
+                <Row style={{margin:"20px", display:"flex", gap:"10px"}}>
+                    <Col >
+                        <div className="imageContainer">
+                            <img style={{position:"absolute",height:"100%",borderRadius:"50%", display:"inline-block"}} 
+                            src="./user.png" alt="profile"/>
+                            <div class="imageOverlay">
+                                <Button style={{margin:"6px"}}>Update Profile</Button>
+                            </div>
+                        </div>
                     </Col>
                     
-                    <Col md={9} style={{padding:"10px", border:"2px solid grey", borderRadius:" 10px"}}>
+                    <Col lg={9} style={{padding:"10px", border:"2px solid grey", borderRadius:" 10px"}}>
                         <h2>{userData.username}</h2>
                         <br/>
                         <Row style={{margin:"10px"}}>
@@ -78,24 +109,36 @@ function Profile() {
                 
                 <Tabs style={{color:"black"}} defaultActiveKey="Added Recipes" id="uncontrolled-tab-example" className="mb-3">
                     <Tab eventKey="Added Recipes" title="Added Recipes">
+                        <Row>
                         {/* <Sonnet /> */}
                         {/* <h1>this is the added recipe tab</h1> */}
+                        {/* <Col md={6} lg={3}> */}
+                        {
+                        myPost.map((item)=>{
+                        return(
+                        <Col md={6} lg={3}>
                         <Card  style={{ width: '18rem' }}>
                             <Card.Img style={{objectFit: "cover",
                             backgroundRepeat: "no-repeat",
                             backgroundPosition: "center center",
-                            height: "35vh"}}  variant="top" src="./momos.jpg" />
+                            height: "35vh"}}  variant="top" src={process.env.REACT_APP_IMAGE_PATH+item.image} />
                             <Card.Body>
-                                <Card.Title>Momos</Card.Title>
-                                <Card.Text>
-                                Momos are a popular street food in northern parts of India. These are also known as Dim Sum and are basically dumplings made from flour with a savory stuffing.
+                            <Card.Title>{item.title}</Card.Title>
+                                <Card.Text style={{
+                                    height: "15vh"}}>
+                                {item.description}
                                 </Card.Text>
-                                <Card.Footer style={{textAlign:"right"}}>
+                                {/* <Card.Footer style={{textAlign:"right"}}>
                                     <AiOutlineLike/>{' '}<AiOutlineDislike/>
-                                </Card.Footer>
+                                </Card.Footer> */}
                             </Card.Body>
                             
                         </Card>
+                        </Col>
+                          )
+                        })}
+                        </Row>
+                        {/* </Col> */}
                         {/* <Card  style={{ width: '18rem' }}>
                             <Card.Img variant="top" src="momos.jpg" alt="userImage"/>
                             <Card.Body>
@@ -110,7 +153,7 @@ function Profile() {
                     <Tab eventKey="Favorites" title="Favorites">
                         {/* <Sonnet /> */}
                         {/* <h1> this is the favorites tab</h1> */}
-                        <Card  style={{ width: '18rem' }}>
+                        {/* <Card  style={{ width: '18rem' }}>
                             <Card.Img 
                             style={{objectFit: "cover",
                             backgroundRepeat: "no-repeat",
@@ -125,8 +168,8 @@ function Profile() {
                             </Card.Body>
                             <Card.Footer style={{textAlign:"right"}}>
                                 <AiOutlineLike/>{' '}<AiOutlineDislike/>
-                            </Card.Footer>
-                        </Card>
+                            </Card.Footer> 
+                        </Card> */}
                         {/* <Card  style={{ width: '18rem' }}>
                             <Card.Img variant="top" src="Alfredo.jpg" alt="userImage"/>
                             <Card.Body>
@@ -152,4 +195,3 @@ function Profile() {
   }
   
   export default Profile;
-  

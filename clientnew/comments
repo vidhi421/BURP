@@ -1,22 +1,4 @@
-import Carousel from 'react-bootstrap/Carousel';
-import Card from 'react-bootstrap/Card';
-import CardGroup from 'react-bootstrap/CardGroup';
- import { useEffect,useState } from 'react'
-import { Link } from 'react-router-dom'
-
-//icons
-import { AiOutlineDislike } from 'react-icons/ai'
-import { AiOutlineLike } from 'react-icons/ai'
-// import { BiCommentDetail } from 'react-icons/bi'
-// import { FiEdit } from 'react-icons/fi'
-
-//require('dotenv').config();
-
-function CardSlider() {
-
-  const [userData , setUserData] = useState([]); 
-
-  // const  callRecipes = async () =>{
+// const  callRecipes = async () =>{
   //     try{
   //         const res = await fetch('/allrecipe',{
   //             method: "GET",
@@ -40,41 +22,7 @@ function CardSlider() {
   //     }
   // }
 
-  useEffect(() => {
-      //callRecipes();
-      fetch('/allrecipe')
-      .then(res=>res.json())
-      .then(result=>{
-        //console.log(result.recipes[0].image)
-        setUserData(result.recipes)
-      })
-  },[]);
-
-
-  return (
-    <div>
-      
-       
-            <Carousel style={{marginBottom:"20px",height:"600px"}}>
-            {
-          userData.map((item)=>{
-          return(
-        <Carousel.Item style={{padding:"25px"}}>
-          <CardGroup>
-         
-            <Card style={{padding:"15px"}}>
-              <Card.Img  style={{objectFit: "cover",
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: "center center",
-              //http://localhost:7000/public/images/1650821738103_jjk.jpg
-              height: "35vh"}}  variant="top" src={process.env.REACT_APP_IMAGE_PATH+item.image}/>
-              <Card.Body>
-              <Card.Title>{item.title}</Card.Title>
-                <Card.Text>
-                {item.description}
-                </Card.Text>
-              </Card.Body>
-              <Card.Footer style={{textAlign:"right"}}>
+  {/* <Card.Footer style={{textAlign:"right"}}>
                 <AiOutlineLike/>{' '}<AiOutlineDislike/>
               </Card.Footer>
             </Card>
@@ -114,14 +62,8 @@ function CardSlider() {
           //    )
           //   })
           // } */}
-          </CardGroup>
-        </Carousel.Item>
-        )
-        })}
-        </Carousel> 
-         
-      
-        {/* <Carousel.Item style={{padding:"25px",height:"500px"}}>
+
+           {/* <Carousel.Item style={{padding:"25px",height:"500px"}}>
           <CardGroup>
             <Card style={{padding:"15px"}}>
               <Card.Img style={{objectFit: "cover",
@@ -172,9 +114,3 @@ function CardSlider() {
           </CardGroup>
         </Carousel.Item> */}
       
-        
-    </div>
-  );
-}
-
-export default CardSlider;

@@ -8,7 +8,7 @@ function Footer() {
   return (
     <div>
       <footer>
-        <div style={{background:"grey", color:"white", padding:"30px"}}>
+        <div style={{background:"#506377", color:"white", padding:"30px"}}>
           <Row>
             <Col md="1"></Col>
             <Col md="4"><h2> BURP! </h2></Col>

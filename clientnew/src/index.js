@@ -11,12 +11,12 @@ import Profile from "./Components/Profile"
 import RecipeInfo from "./Components/RecipeInfo"
 import LoginPage from "./Components/LoginPage"
 import AddRecipe from './Components/AddRecipe'
-
+import FilterRecipe from './Components/FilterRecipes'
+import UpdateProfile from './Components/UpdateProfile'
 import {
   BrowserRouter,
   Routes,
   Route,
-  // Link
 } from "react-router-dom";
 
 require('dotenv').config();
@@ -28,16 +28,15 @@ ReactDOM.render(
       <Route path="/" element={<App />}/>
         <Route path="/SignUpPage" element={<SignUp />} />
         <Route path="/LoginPage" element={<LoginPage />} />
-        <Route path="/Profile" element={<Profile />} />
+        <Route path="/Profile" element={<Profile />}/>
+        <Route path="/UpdateProfile" element={<UpdateProfile/>}/>
         <Route path="/RecipeInfo" element={<RecipeInfo />} />
         <Route path="/AddRecipe" element={<AddRecipe />} />
-       
+        <Route path="/FilterRecipe" element={<FilterRecipe />} />
+
     </Routes>
     <Footer/>
   </BrowserRouter>,
-  // <React.StrictMode>
-  //   <App />
-  // </React.StrictMode>,
   document.getElementById('root')
 );
 

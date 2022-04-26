@@ -26,7 +26,7 @@ function RecipeInfo() {
                 <Row>
                 <Col lg="4" style={{ width: '24rem' , marginRight:'15px'}}>
                     <Card >
-                        <Card.Img variant="top" src="momos.jpg" />
+                        <Card.Img variant="top" src="momo2.jpg" />
                         <Card.Body style={{textAlign:"center"}}>
                             {/* <Card.Title>Card Title</Card.Title> */}
                             <Card.Text>
@@ -66,12 +66,12 @@ function RecipeInfo() {
                         </tbody>
                     </Table>
                     <p><AiOutlineClockCircle/> Cooking time: 30 min</p>
-                    <p><AiFillTags/> #tags</p>
+                    {/* <p><AiFillTags/> #tags</p> */}
                 </Col>
                 {/* <div style={{textAlign:"right",display:"flex", width:"100px",bottom:"-20%"}}> */}
-                <div style={{textAlign:"right"}}>
+                {/* <div style={{textAlign:"right"}}>
                     <AiOutlineLike />{' '}<AiOutlineDislike  />{' '}<BiCommentDetail />{' '}<FiEdit />
-                </div>
+                </div> */}
                 {/* <div >
                     <span style={{height:"30px", width:"30px"}}><AiOutlineLike size="2x"/></span>
                     <span style={{height:"30px", width:"30px"}}><AiOutlineDislike  size="2x"/></span>

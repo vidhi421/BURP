@@ -172,6 +172,19 @@ router.get('/allrecipe',(req,res)=>{
     })
 })
 
+router.get('/myrecipe',authenticate,(req,res)=>{
+    Recipeadd.find({postedBy:req.rootUser._id})
+    .populate("postedBy","_id username")
+    .then(recipes=>{
+        res.json({recipes})
+        console.log({recipes})
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+    //res.send(req.rootUser);
+})
+
 
 router.get('/Profile', authenticate ,(req,res) => {
     console.log("hello profile");

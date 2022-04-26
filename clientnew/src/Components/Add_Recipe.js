@@ -9,28 +9,20 @@ import { useNavigate } from 'react-router-dom'
 
 function AddRecipe() {
 
-    const navigate=useNavigate()
-
-
     const [recipeInfo, setRecipeInfo]=useState({
-        author:"", title:"", description:"",
-         image:"",
-          cuisine:"", course:"", mood:"", diet:"",skills:"", 
-         numserve:"", cooktime:"",
-         instruction:"",
-        ingredients:"",
+         author:"", title:"", description:"",
+        //   image:"",
+         traditional:"", cuisine:"", course:"", moods:"", diet:"",skills:"", 
+         servings:"", time:"",
+         instructions:"",
+         ingredients:"",
          kcal:"", fat:"", protein:"", carbs:"", sugar:"" , fibre:""
     });
 
-    let name,value;
-    const imageUpload=(event)=>{
-        console.log(event.target.files[0]);
-        setRecipeInfo({...recipeInfo,image:event.target.files[0]});
-    }
     
 
-    
     //for the rest fields
+    let name,value;
     const handleInputs=(e)=>{
         e.preventDefault();
         console.log(e);
@@ -40,66 +32,8 @@ function AddRecipe() {
         setRecipeInfo({...recipeInfo, [name]:value});
     }
 
-    const PostData = async(e)=>{
-        e.preventDefault();
-        // const{author,title,description,
-        //   cuisine, course, mood, diet,skills, 
-        //  numserve, cooktime,
-        //  instruction,ingredients,
-        //  kcal, fat, protein, carbs, sugar , fibre}=recipeInfo;
-         const fd= new FormData();
-         fd.append('image',recipeInfo.image,recipeInfo.image.name);
-         fd.append('author',recipeInfo.author)
-         fd.append('title',recipeInfo.title)
-         fd.append('description',recipeInfo.description)
-         fd.append('cuisine',recipeInfo.cuisine)
-         fd.append('course',recipeInfo.course)
-         fd.append('mood',recipeInfo.mood)
-         fd.append('diet',recipeInfo.diet)
-         fd.append('skills',recipeInfo.skills)
-         fd.append('numserve',recipeInfo.numserve)
-         fd.append('cooktime',recipeInfo.cooktime)
-         fd.append('instruction',recipeInfo.instruction)
-         fd.append('ingredients',recipeInfo.ingredients)
-         fd.append('kacl',recipeInfo.kcal)
-         fd.append('fat',recipeInfo.fat)
-         fd.append('protein',recipeInfo.protein)
-         fd.append('carbs',recipeInfo.carbs)
-         fd.append('sugar',recipeInfo.sugar)
-         fd.append('fibre',recipeInfo.fibre)
-
-         const res = await fetch("/AddRecipe",{
-             method:"POST",
-            //  headers:{
-            //      "Content-Type":"application/json"
-            //  },
-            //  body: JSON.stringify({
-            //     author,title,description,
-            //      cuisine, course, mood, diet,skills, 
-            //     numserve, cooktime,
-            //     instruction,ingredients,
-            //     kcal, fat, protein, carbs, sugar , fibre
-            //  }) ,fd
-
-            body: fd
-         });
-
-         const data=await res.json();
-
-         if(data.status===422 || !data){
-             window.alert("invalid");
-             console.log("invalid");
-         } else{
-            window.alert("recipe added!");
-            console.log("recipe added!");
-
-            navigate("/Profile");
-         }
-
-    }
-
     //middleware
-    
+    const navigate=useNavigate()
 
     const  callAddrecipe = async () =>{
         try{
@@ -130,21 +64,12 @@ function AddRecipe() {
     },[]);
 
 
-    // const handelReset=()=>({
-    //     author:"", title:"", description:"",
-    //      image:"",
-    //      numserve:"", cooktime:"",
-    //      instruction:"",
-    //     ingredients:"",
-    //      kcal:"", fat:"", protein:"", carbs:"", sugar:"" , fibre:""
-    // });
-
   return (
     <div>
 
         <Form  
-         method="POST" 
-        //onChange={handleSubmit}
+        // method="POST" 
+        onChange={handleSubmit}
         style={{padding:"50px"}}>
             <h1 style={{ marginBottom:"20px"}}>New Recipe</h1>
             <h2 class="heading2">Details</h2>
@@ -182,25 +107,40 @@ function AddRecipe() {
 
             <Form.Group controlId="formFile1" className="mb-3">
                 <Form.Label>Recipe Image</Form.Label>
-                <Form.Control type="file" name="image" onChange={imageUpload}/>
+                <Form.Control type="file" />
             </Form.Group>
 
             <hr></hr>
             <h2 class="heading2">Filters</h2>
             <Row>
+            <Form.Group md={4} as={Col} controlId="formGridState1">
+                <Form.Label>Traditional</Form.Label>
+                <Form.Select 
+                value={recipeInfo.traditional}
+                onChange={handleInputs}
+                name="traditional"
+                defaultValue="Choose...">
+                    <option value="Choose...">Choose...</option>
+                    <option value="East">East</option>
+                    <option value="North">North</option>
+                    <option value="North Eastern">North Eastern</option>
+                    <option value="West">West</option>
+                    <option value="South">South</option>
+                </Form.Select>
+                </Form.Group>
 
-                <Form.Group md={6} as={Col} controlId="formGridState2">
+                <Form.Group md={4} as={Col} controlId="formGridState2">
                     <Form.Label>Cuisine</Form.Label>
                     <Form.Select 
-                    //value={recipeInfo.cuisine}
+                    value={recipeInfo.cuisine}
                     onChange={handleInputs}
                     name="cuisine"
                     defaultValue="Choose...">
                         <option value="Choose...">Choose...</option>
                         <option value="America">American</option>
+                        
                         <option value="Chinese">Chinese</option>
                         <option value="French">French</option>
-                        <option value="Indian">Indian</option>
                         <option value="Italian">Italian</option>
                         <option value="Japanese">Japanese</option>
                         <option value="Korean">Korean</option>
@@ -210,21 +150,18 @@ function AddRecipe() {
                     </Form.Select>
                 </Form.Group>
 
-                <Form.Group md={6} as={Col} controlId="formGridState3">
+                <Form.Group md={4} as={Col} controlId="formGridState3">
                     <Form.Label>Course</Form.Label>
                     <Form.Select 
-                    //value={recipeInfo.course}
+                    value={recipeInfo.course}
                     onChange={handleInputs}
                     name="course"
                     defaultValue="Choose...">
                         <option value="Choose...">Choose...</option>
                         <option value="BreakFast">BreakFast</option>
                         <option value="Brunch">Brunch</option>
-                        <option value="Dessert">Dessert</option>
-                        <option value="Drinks">Drinks</option>
                         <option value="Lunch">Lunch</option>
                         <option value="Snack">Snack</option>
-                        <option value="Soup-course">Soup-course</option>
                         <option value="Dinner">Dinner</option>
                     </Form.Select>
                 </Form.Group>
@@ -235,7 +172,7 @@ function AddRecipe() {
             <Form.Group md={4} as={Col} controlId="formGridState4">
                 <Form.Label>Mood</Form.Label>
                 <Form.Select 
-                //value={recipeInfo.mood}
+                value={recipeInfo.mood}
                 onChange={handleInputs}
                 name="mood"
                 defaultValue="Choose...">
@@ -251,23 +188,22 @@ function AddRecipe() {
             <Form.Group md={4} as={Col} controlId="formGridState5">
                 <Form.Label>Diet</Form.Label>
                 <Form.Select 
-                //value={recipeInfo.diet}
+                value={recipeInfo.diet}
                 onChange={handleInputs}
                 name="diet"
                 defaultValue="Choose...">
                     <option value="Choose...">Choose...</option>
                     <option value="Low Fat">Low Fat</option>
                     <option value="Low Calorie">Low Calorie</option>
-                    <option value="Vegetarian">Vegetarian</option>
-                    <option value="Low-salt">Low-salt</option>
-                    <option value="Healthy">Healthy</option>
+                    <option value="Veg">Veg</option>
+                    <option value="Vegan">Vegan</option>
                 </Form.Select>
             </Form.Group>
 
             <Form.Group md={4} as={Col} controlId="formGridState6">
                 <Form.Label>Skills</Form.Label>
                 <Form.Select 
-                //value={recipeInfo.skills}
+                value={recipeInfo.skills}
                 onChange={handleInputs}
                 name="skills"
                 defaultValue="Choose...">
@@ -284,18 +220,17 @@ function AddRecipe() {
             <Row>
                 <Col md={6}>
                     <Form.Label>No. of Servings</Form.Label>
-                    <Form.Control 
-                    value={recipeInfo.numserve}
+                    <Form.Control value={recipeInfo.servings}
                     onChange={handleInputs}
-                    name="numserve"
+                    name="servings"
                     placeholder="Serves" />
                 </Col>
                 <Col md={6}>
                     <Form.Label>Cooking Time</Form.Label>
                     <Form.Control 
-                    value={recipeInfo.cooktime}
+                    value={recipeInfo.time}
                     onChange={handleInputs}
-                    name="cooktime"
+                    name="time"
                     placeholder="Cooking Time" />
                 </Col>
             </Row>
@@ -305,9 +240,9 @@ function AddRecipe() {
             <div id="survey_options1">
                 <FloatingLabel controlId="floatingTextarea2">
                     <Form.Control
-                    value={recipeInfo.instruction}
+                    value={recipeInfo.instructions}
                     onChange={handleInputs}
-                    name="instruction"
+                    name="instructions"
                     as="textarea"
                     style={{ height: '100px' }}
                     />
@@ -326,6 +261,32 @@ function AddRecipe() {
                     />
                 </FloatingLabel>
             </div>
+            {/* { inputFields.map((inputFields, index) => (
+                <div key={index}>
+                    <Row className="mb-3">
+                        <Form.Group as={Col} >
+                            <Form.Control 
+                            name="Ingredient1"
+                            value={inputFields.Ingredient1}
+                            placeholder=""
+                            onChange={(event) => handleChangeInput(index,event)}
+                            />
+                        </Form.Group>
+                    </Row>
+                </div>
+            ))}       
+                <Button 
+                variant="secondary" 
+                style={{margin:"10px"}} 
+                onClick ={handleAddFields} >
+                    Add Ingredient 
+                </Button>
+                <Button 
+                variant="secondary" 
+                style={{margin:"10px"}} 
+                onClick ={handleRemoveFields}>
+                    Remove Ingredient
+                </Button> */}
             <hr></hr>
             <h2 class="heading2">Nutrition</h2>
             <Row>
@@ -379,10 +340,10 @@ function AddRecipe() {
                 </Col>
             </Row>
             <hr></hr>
-            <Button style={{margin:"10px"}} variant="success" onClick={PostData} type="submit">
+            <Button style={{margin:"10px"}} variant="success" onChange={handleSubmit}type="submit">
                 Save
             </Button>
-                <Button style={{margin:"10px"}} variant="success" type="reset" onClick={() => setRecipeInfo(() => "")} >
+            <Button style={{margin:"10px"}} variant="success" type="submit">
                 Reset
             </Button>
         </Form>       

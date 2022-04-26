@@ -13,9 +13,9 @@ import { Link } from "react-router-dom"
 function Header() {
 
   return (
-    <div  style={{marginBottom:"78px"}}>
+        <div  style={{marginBottom:"78px"}} >
         {/* bg="dark" variant="dark"sticky="top" */}
-        <Navbar bg="light" expand="lg" fixed="top">
+            <Navbar   variant="dark" expand="lg" fixed="top" style={{background:"#506377"}}>
         <Container fluid>
             <Link to="/">
                 <img
@@ -50,7 +50,7 @@ function Header() {
                 {/* </NavDropdown.Item> */}
                 
                 {/* dropdown#2 */}
-                <NavDropdown title="Cuisine" id="navbarScrollingDropdown">
+                <NavDropdown title="Cuisine"  id="navbarScrollingDropdown">
                     <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">American</Link></NavDropdown.Item>
                     <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">Chinese</Link></NavDropdown.Item>
                     <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">French</Link></NavDropdown.Item>
@@ -105,18 +105,14 @@ function Header() {
             </Nav>
             
             <Form className="d-flex">
-                <FormControl
-                type="search"
-                placeholder="Search"
-                className="me-2"
-                aria-label="Search"
-                />
-                <Button variant="outline-success">Search</Button>
+                <Link to='./FilterRecipe'>
+                <Button variant="outline-success"  style={{ background:"white"}}>Search</Button>
+                </Link>
             </Form>
             <div>
                 {/* <Button style={{marginLeft:"25px", marginRight:"3px"}} variant="outline-success">Sign Up</Button> */}
-                <Link to="/LoginPage"><Button style={{marginLeft:"25px", marginRight:"3px"}} variant="outline-success">Login</Button></Link>
-                <Link to="/Profile"><Button style={{margin:"3px"}} variant="outline-success">Profile</Button></Link>
+                <Link to="/LoginPage"><Button style={{marginLeft:"25px", marginRight:"3px" , background:"white"}} variant="outline-success">Login</Button></Link>
+                <Link to="/Profile"><Button style={{margin:"3px" , background:"white"}} variant="outline-success" >Profile</Button></Link>
             </div>
 
             </Navbar.Collapse>
