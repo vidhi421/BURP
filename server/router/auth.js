@@ -185,6 +185,61 @@ router.get('/myrecipe',authenticate,(req,res)=>{
     //res.send(req.rootUser);
 })
 
+router.put('/like',authenticate,(req,res)=>{
+    Recipeadd.findByIdAndUpdate(req.body.recipeId,{
+        $push:{likes:req.rootUser._id}
+    },{
+        new:true
+    }).exec((err,result)=>{
+        if(err){
+            return res.status(422).json({error:err})
+        }
+        else{
+            res.json(result)
+        }
+    })
+    
+})
+
+router.put('/unlike',authenticate,(req,res)=>{
+    Recipeadd.findByIdAndUpdate(req.body.recipeId,{
+        $pull:{likes:req.rootUser._id}
+    },{
+        new:true
+    }).exec((err,result)=>{
+        if(err){
+            return res.status(422).json({error:err})
+        }
+        else{
+            res.json(result)
+        }
+    })
+    
+})
+
+router.put('/comment',authenticate,(req,res)=>{
+
+    const comment ={
+        text: req.body.text,
+        postedBy: req.rootUser._id
+    }
+
+    Recipeadd.findByIdAndUpdate(req.body.recipeId,{
+        $push:{comments:comment}
+    },{
+        new:true
+    })
+    .populate("comments.postedBy","_id username")
+    .exec((err,result)=>{
+        if(err){
+            return res.status(422).json({error:err})
+        }
+        else{
+            res.json(result)
+        }
+    })
+    
+})
 
 router.get('/Profile', authenticate ,(req,res) => {
     console.log("hello profile");

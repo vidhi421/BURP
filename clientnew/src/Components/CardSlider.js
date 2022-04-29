@@ -16,9 +16,13 @@ function CardSlider() {
       fetch('/allrecipe')
       .then(res=>res.json())
       .then(result=>{
+        console.log(result)
         setUserData(result.recipes)
       })
   },[]);
+
+  
+
 
 
   return (

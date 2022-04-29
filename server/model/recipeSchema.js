@@ -71,6 +71,14 @@ const recipeSchema = new mongoose.Schema({
     fibre:{
         type:Number
     },
+    likes:[{
+        type: ObjectId,
+        ref: "USER"
+    }],
+    comments:[{
+        text: String,
+        postedBy:{type:ObjectId,ref: "USER"}
+    }],
     postedBy:{
         type: ObjectId,
         ref: "USER"
