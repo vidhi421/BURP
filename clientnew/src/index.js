@@ -27,13 +27,16 @@ ReactDOM.render(
     <Header/>
     <Routes>
       <Route path="/" element={<App />}/>
+      <Route path="/recipe/:recipeId" element={<RecipeInfo />} />
         <Route path="/SignUpPage" element={<SignUp />} />
         <Route path="/LoginPage" element={<LoginPage />} />
         <Route path="/Profile" element={<Profile />}/>
+        <Route path="Profile/:recipeId" element={<RecipeInfo />} />
         <Route path="/UpdateProfile" element={<UpdateProfile/>}/>
         <Route path="/RecipeInfo" element={<RecipeInfo />} />
         <Route path="/AddRecipe" element={<AddRecipe />} />
         <Route path="/FilterRecipe" element={<FilterRecipe />} />
+        <Route path="/FilterRecipe/:recipeId" element={<RecipeInfo/>} />
         <Route path="*" element={<ErrorPage/>} />
     </Routes>
     <Footer/>

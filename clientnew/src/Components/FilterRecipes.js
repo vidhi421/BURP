@@ -7,6 +7,7 @@ import Card from 'react-bootstrap/Card'
 //import data from './Recipe.json'
 import FormControl from 'react-bootstrap/FormControl'
 import Form from 'react-bootstrap/Form'
+import {useNavigate} from 'react-router-dom'
 // import Button from 'react-bootstrap/Button'
 //import {createContext} from "react";
 
@@ -22,7 +23,7 @@ function FilterRecipes(){
     const [searchTerm, setSearchTerm] = useState("");
     const [data, setData] = useState([]);
     const [userData , setUserData] = useState({}); 
-
+    const navigate=useNavigate()
     //const UserContext=createContext();
 
     //const {state,dispatch} =useContext(UserContext)
@@ -178,7 +179,11 @@ function FilterRecipes(){
                         }
                     }).map((rec) =>                    
                         <Col md={6} lg={3}>
-                            <Card style={{ width: '18rem', margin:"10px" }}>
+                            <Card style={{ width: '18rem', margin:"10px" }}
+                            onClick={() => {
+                                navigate(`${rec._id}`);
+                                }}
+                            >
                                 <Card.Img 
                                 style={{objectFit: "cover",
                                 backgroundRepeat: "no-repeat",

@@ -4,13 +4,13 @@ import CardGroup from 'react-bootstrap/CardGroup';
 import { useState ,useEffect} from 'react'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { Link } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import data from './Recipe.json'
 
 function CardSlider() {
 
   const [userData , setUserData] = useState([]); 
-
+  const navigate=useNavigate();
   useEffect(() => {
       
       fetch('/allrecipe')
@@ -35,7 +35,11 @@ function CardSlider() {
         
           <CardGroup>
          
-            <Card style={{padding:"15px 25px 15px 25px",height:"300px"}}>
+            <Card style={{padding:"15px 25px 15px 25px",height:"300px"}}
+            onClick={() => {
+              navigate(`/recipe/${item._id}`);
+              }}
+              >
               <Row>
                 <Col>
               

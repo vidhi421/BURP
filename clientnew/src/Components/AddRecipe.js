@@ -56,7 +56,7 @@ function AddRecipe() {
          fd.append('cooktime',recipeInfo.cooktime)
          fd.append('instruction',recipeInfo.instruction)
          fd.append('ingredients',recipeInfo.ingredients)
-         fd.append('kacl',recipeInfo.kcal)
+         fd.append('kcal',recipeInfo.kcal)
          fd.append('fat',recipeInfo.fat)
          fd.append('protein',recipeInfo.protein)
          fd.append('carbs',recipeInfo.carbs)

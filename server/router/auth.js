@@ -27,6 +27,10 @@ router.get('/',(req,res) =>{
     res.send("hello from router");
 });
 
+router.get('/Profile', authenticate ,(req,res) => {
+    console.log("hello profile");
+    res.send(req.rootUser);
+})
 //using promises
 
 // router.post('/SignUpPage',(req,res) => {
@@ -185,6 +189,15 @@ router.get('/myrecipe',authenticate,(req,res)=>{
     //res.send(req.rootUser);
 })
 
+router.get("/:id",async(req,res)=>{
+    try{
+        const recipe = await Recipeadd.findById(req.params.id).populate("postedBy","username")
+        res.status(200).json(recipe);
+    }catch(err){
+        res.status(500).json(err);
+    }
+});
+
 router.put('/like',authenticate,(req,res)=>{
     Recipeadd.findByIdAndUpdate(req.body.recipeId,{
         $push:{likes:req.rootUser._id}
@@ -241,9 +254,6 @@ router.put('/comment',authenticate,(req,res)=>{
     
 })
 
-router.get('/Profile', authenticate ,(req,res) => {
-    console.log("hello profile");
-    res.send(req.rootUser);
-})
+
 
 module.exports = router;

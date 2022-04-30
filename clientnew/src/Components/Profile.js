@@ -30,7 +30,7 @@ function Profile() {
             });
 
             const data = await res.json();
-            console.log(data);
+            //console.log(data);
             setUserData(data); 
 
             if(!res.status === 200){
@@ -117,7 +117,11 @@ function Profile() {
                         myPost.map((item)=>{
                         return(
                         <Col md={6} lg={3}>
-                        <Card  style={{ width: '18rem' }}>
+                        <Card  style={{ width: '18rem' }}
+                        onClick={() => {
+                            navigate(`${item._id}`);
+                            }}
+                        >
                             <Card.Img style={{objectFit: "cover",
                             backgroundRepeat: "no-repeat",
                             backgroundPosition: "center center",
