@@ -180,17 +180,22 @@ function FilterRecipes(){
                     }).map((rec) =>                    
                         <Col md={6} lg={3}>
                             <Card style={{ width: '18rem', margin:"10px" }}
-                            onClick={() => {
-                                navigate(`${rec._id}`);
-                                }}
+                           
                             >
                                 <Card.Img 
+                                 onClick={() => {
+                                    navigate(`${rec._id}`);
+                                    }}
                                 style={{objectFit: "cover",
                                 backgroundRepeat: "no-repeat",
                                 backgroundPosition: "center center",
                                 height: "35vh"}} 
                                 variant="top" src={process.env.REACT_APP_IMAGE_PATH+rec.image} />
-                                <Card.Body>
+                                <Card.Body
+                                 onClick={() => {
+                                    navigate(`${rec._id}`);
+                                    }}
+                                >
                                     <Card.Title>{rec.title}</Card.Title>
                                     <Card.Text
                                     style={{

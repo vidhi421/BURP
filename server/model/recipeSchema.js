@@ -50,7 +50,7 @@ const recipeSchema = new mongoose.Schema({
     ,
     ingredients:
     {
-        type:String,
+        type:Object,
         required:true
     },
     kcal:{
@@ -77,7 +77,7 @@ const recipeSchema = new mongoose.Schema({
     }],
     comments:[{
         text: String,
-        postedBy:{type:ObjectId,ref: "USER"}
+        postedBy:{type:ObjectId, ref: "USER"}
     }],
     postedBy:{
         type: ObjectId,

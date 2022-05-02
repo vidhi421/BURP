@@ -168,6 +168,7 @@ router.post('/AddRecipe',upload.single('image'),authenticate,(req,res) => {
 router.get('/allrecipe',(req,res)=>{
     Recipeadd.find()
     .populate("postedBy","_id username")
+    .populate("comments.postedBy","_id username")
     .then(recipes=>{
         res.json({recipes})
     })
@@ -179,6 +180,21 @@ router.get('/allrecipe',(req,res)=>{
 router.get('/myrecipe',authenticate,(req,res)=>{
     Recipeadd.find({postedBy:req.rootUser._id})
     .populate("postedBy","_id username")
+    .populate("comments.postedBy","_id username")
+    .then(recipes=>{
+        res.json({recipes})
+        console.log({recipes})
+    })
+    .catch(err=>{
+        console.log(err)
+    })
+    //res.send(req.rootUser);
+})
+
+router.get('/likedrecipe',authenticate,(req,res)=>{
+    Recipeadd.find({likes:req.rootUser._id})
+    .populate("postedBy","_id username")
+    .populate("comments.postedBy","_id username")
     .then(recipes=>{
         res.json({recipes})
         console.log({recipes})
@@ -191,7 +207,7 @@ router.get('/myrecipe',authenticate,(req,res)=>{
 
 router.get("/:id",async(req,res)=>{
     try{
-        const recipe = await Recipeadd.findById(req.params.id).populate("postedBy","username")
+        const recipe = await Recipeadd.findById(req.params.id).populate("postedBy","_id username").populate("comments.postedBy","_id username")
         res.status(200).json(recipe);
     }catch(err){
         res.status(500).json(err);
@@ -253,6 +269,49 @@ router.put('/comment',authenticate,(req,res)=>{
     })
     
 })
+
+//update recipe
+router.put("/:id", async (req,res)=> {
+    try{
+        const recipe = await Recipeadd.findById(req.params.id);
+        if(recipe.postedBy.username === req.body.username){
+            try {
+                    const updatedRecipe= await Recipeadd.findByIdAndUpdate(req.params.id,{
+                        $set : req.body,
+                    },
+                    { new : true}
+                    );
+                    res.status(100).json(updatedRecipe);
+             } catch (error) {
+                res.status(500).json(err)
+            }
+       } else{
+           res.status(401).json("can update only your recipe")
+       }   
+    }catch(err){
+         res.status(500).json(err)
+    }
+})
+
+//delete recipe
+router.delete("/:id",authenticate, async (req,res)=> {
+    try{
+        const recipe = await Recipeadd.findById(req.params.id);
+        if(recipe.postedBy._id === req.rootUser._id){
+            try {
+                   await recipe.delete()
+                    res.status(100).json("recipe deleted");
+             } catch (error) {
+                res.status(500).json(err)
+            }
+       } else{
+           res.status(401).json("can delete only your recipe")
+       }   
+    }catch(err){
+         res.status(500).json(err)
+    }
+})
+
 
 
 

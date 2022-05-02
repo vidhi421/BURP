@@ -9,15 +9,26 @@ import { useNavigate } from 'react-router-dom'
 import { useEffect , useState } from 'react';
 import '../App.css'
 import Add from  './Add.js'
+import { useLocation } from 'react-router-dom';
+//import { useEffect,useState } from 'react';
+import axios from "axios";
+import React from "react";
 
-import { AiOutlineDislike } from 'react-icons/ai'
-import { AiOutlineLike } from 'react-icons/ai'
+import { BsTrash} from "react-icons/bs";
+import { AiFillEdit } from "react-icons/ai";
 
 function Profile() {
+
+    const location = useLocation()
+    const path = location.pathname.split("/")[2];
+
     const navigate=useNavigate();
     const [userData , setUserData] = useState({}); 
 
+   
+
     const[myPost, setPost]=useState([]);
+    const[myLike, setLike]=useState([]);
     const  callProfile = async () =>{
         try{
             const res = await fetch('/Profile',{
@@ -44,6 +55,27 @@ function Profile() {
     }
 
 
+    const  MyLikes = async () =>{
+        try{
+            const res = await fetch('/likedrecipe',{
+                method: "GET",
+                headers:{
+                    Accept:"application/json",
+                    "Content-type":"application/json"
+                },
+                credentials:"include"
+            });
+
+            const data = await res.json();
+            console.log(data);
+            // setPost(data);
+            setLike(data.recipes); 
+
+        }catch(err){
+            console.log(err);
+        }
+    }
+
     const  MyRecipes = async () =>{
         try{
             const res = await fetch('/myrecipe',{
@@ -68,7 +100,19 @@ function Profile() {
     useEffect(() => {
         callProfile();
         MyRecipes();
+        MyLikes();
     },[]);
+
+    const handelDelete = async()=>{
+        try{
+            await axios.delete("/"+path);
+            window.location.replace("/")
+        }
+        catch(err)
+        {
+
+        }
+    }
 
 
     return (
@@ -118,23 +162,33 @@ function Profile() {
                         return(
                         <Col md={6} lg={3}>
                         <Card  style={{ width: '18rem' }}
-                        onClick={() => {
-                            navigate(`${item._id}`);
-                            }}
+                       
                         >
-                            <Card.Img style={{objectFit: "cover",
+                            <Card.Img 
+                             onClick={() => {
+                                navigate(`${item._id}`);
+                                }}
+                            style={{objectFit: "cover",
                             backgroundRepeat: "no-repeat",
                             backgroundPosition: "center center",
                             height: "35vh"}}  variant="top" src={process.env.REACT_APP_IMAGE_PATH+item.image} />
-                            <Card.Body>
+                            <Card.Body
+                             onClick={() => {
+                                navigate(`${item._id}`);
+                                }}
+                            >
                             <Card.Title>{item.title}</Card.Title>
                                 <Card.Text style={{
                                     height: "15vh"}}>
                                 {item.description}
                                 </Card.Text>
-                                {/* <Card.Footer style={{textAlign:"right"}}>
-                                    <AiOutlineLike/>{' '}<AiOutlineDislike/>
-                                </Card.Footer> */}
+                                <Card.Footer style={{textAlign:"right"}}>
+                                <span 
+                                     onClick={handelDelete}
+ 
+                                     ><BsTrash/></span>
+                                {/* <BsTrash/>{' '}<AiFillEdit onClick={handelDelete}/> */}
+                                </Card.Footer>
                             </Card.Body>
                             
                         </Card>
@@ -155,25 +209,34 @@ function Profile() {
                         </Card> */}
                     </Tab>
                     <Tab eventKey="Favorites" title="Favorites">
+                    <Row>
                         {/* <Sonnet /> */}
                         {/* <h1> this is the favorites tab</h1> */}
-                        {/* <Card  style={{ width: '18rem' }}>
+                        {
+                        myLike.map((item)=>{
+                        return(
+                        <Col md={6} lg={3}>
+                        <Card  style={{ width: '18rem' }}
+                        onClick={() => {
+                            navigate(`${item._id}`);
+                            }}
+                        >
                             <Card.Img 
                             style={{objectFit: "cover",
                             backgroundRepeat: "no-repeat",
                             backgroundPosition: "center center",
                             height: "35vh"}} 
-                            variant="top" src="./Alfredo.jpeg" />
+                            variant="top" src={process.env.REACT_APP_IMAGE_PATH+item.image} />
                             <Card.Body>
-                                <Card.Title>Alfredo Pasta</Card.Title>
+                                <Card.Title>{item.title}</Card.Title>
                                 <Card.Text>
-                                    The Alfredo Pasta is an Italian pasta dish made using fresh pasta, vegetables, chicken pieces combined with butter, cream and cheese.
+                                {item.description}
                                 </Card.Text>
                             </Card.Body>
                             <Card.Footer style={{textAlign:"right"}}>
-                                <AiOutlineLike/>{' '}<AiOutlineDislike/>
+                                {/* <AiOutlineLike/>{' '}<AiOutlineDislike/> */}
                             </Card.Footer> 
-                        </Card> */}
+                        </Card>
                         {/* <Card  style={{ width: '18rem' }}>
                             <Card.Img variant="top" src="Alfredo.jpg" alt="userImage"/>
                             <Card.Body>
@@ -184,6 +247,10 @@ function Profile() {
                                 </Card.Text> 
                             </Card.Body>
                         </Card> */}
+                        </Col>
+                        )
+                      })}
+                         </Row>
                     </Tab>
                     {/* <Tab eventKey="contact" title="Contact" disabled>
                         <Sonnet />
