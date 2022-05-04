@@ -271,12 +271,12 @@ router.put('/comment',authenticate,(req,res)=>{
 })
 
 //update recipe
-router.put("/:id", async (req,res)=> {
+router.put("/Profile/:recipeId",authenticate ,async (req,res)=> {
     try{
-        const recipe = await Recipeadd.findById(req.params.id);
-        if(recipe.postedBy.username === req.body.username){
+        const recipe = await  Recipeadd.findById(req.params.recipeId).populate("postedBy","_id")
+        if(recipe.postedBy._id.toString() === req.rootUser._id.toString()){
             try {
-                    const updatedRecipe= await Recipeadd.findByIdAndUpdate(req.params.id,{
+                    const updatedRecipe= await Recipeadd.findByIdAndUpdate(req.params.recipeId,{
                         $set : req.body,
                     },
                     { new : true}
@@ -294,24 +294,29 @@ router.put("/:id", async (req,res)=> {
 })
 
 //delete recipe
-router.delete("/:id",authenticate, async (req,res)=> {
-    try{
-        const recipe = await Recipeadd.findById(req.params.id);
-        if(recipe.postedBy._id === req.rootUser._id){
-            try {
-                   await recipe.delete()
-                    res.status(100).json("recipe deleted");
-             } catch (error) {
-                res.status(500).json(err)
-            }
-       } else{
-           res.status(401).json("can delete only your recipe")
-       }   
-    }catch(err){
-         res.status(500).json(err)
-    }
+router.delete("/deleterecipe/:recipeId",authenticate,(req,res)=> {
+   Recipeadd.findOne({_id:req.params.recipeId})
+   .populate("postedBy","_id")
+   .exec((err,recipe)=>{
+       if(err || !recipe){
+          return res.status(422).json({error:err})
+       }
+       if(recipe.postedBy._id.toString() === req.rootUser._id.toString()){
+        recipe.remove()
+        .then(result=>{
+            res.json(result)
+        }).catch(err=>{
+            console.log(err)
+        })
+       }
+   })
 })
 
+router.get('/logout',(req,res)=>{
+    console.log("log out");
+    res.clearCookie('jwtoken',{path:'/'})
+    res.status(200).send("user logout")
+});
 
 
 

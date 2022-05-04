@@ -13,6 +13,7 @@ import LoginPage from "./Components/LoginPage"
 import AddRecipe from './Components/AddRecipe'
 import FilterRecipe from './Components/FilterRecipes'
 import UpdateProfile from './Components/UpdateProfile'
+import Logout from './Components/Logout'
 import ErrorPage from './Components/ErrorPage'
 import {
   BrowserRouter,
@@ -37,6 +38,7 @@ ReactDOM.render(
         <Route path="/AddRecipe" element={<AddRecipe />} />
         <Route path="/FilterRecipe" element={<FilterRecipe />} />
         <Route path="/FilterRecipe/:recipeId" element={<RecipeInfo/>} />
+        <Route path="/logout" element={<Logout/>} />
         <Route path="*" element={<ErrorPage/>} />
     </Routes>
     <Footer/>

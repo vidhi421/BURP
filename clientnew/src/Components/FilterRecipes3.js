@@ -8,10 +8,8 @@ import Card from 'react-bootstrap/Card'
 import FormControl from 'react-bootstrap/FormControl'
 import Form from 'react-bootstrap/Form'
 import {useNavigate} from 'react-router-dom'
-import Button from 'react-bootstrap/Button'
+// import Button from 'react-bootstrap/Button'
 //import {createContext} from "react";
-// import Categories from './Categories'
-import Dropdown from 'react-bootstrap/Dropdown'
 
 //icons
 import { FcSearch } from "react-icons/fc";
@@ -26,7 +24,18 @@ function FilterRecipes(){
     const [data, setData] = useState([]);
     const [userData , setUserData] = useState({}); 
     const navigate=useNavigate()
-    
+    //const UserContext=createContext();
+
+    //const {state,dispatch} =useContext(UserContext)
+
+
+    // useEffect(() => {
+    //     fetch('/allrecipe')
+    //     .then(res=>res.json())
+    //     .then(result=>{
+    //         setData(result.recipes)
+    //     })
+    // },[]);
 
     const  AllRecipes = async () =>{
         try{
@@ -48,17 +57,7 @@ function FilterRecipes(){
             console.log(err);
         }
     }
-
-    const [items,setItems]=useState(data);
-    const filterMenu=(category)=>{
-        const updatedItems=data.filter((curElem)=>{
-            return (curElem.cuisine===category || curElem.course===category || curElem.diet===category|| curElem.skills===category|| curElem.mood===category);
-        });
-        setItems(updatedItems);
-        // setData(updatedItems);
-        // console.log(updatedItems)
-    }
-
+  
     const  LikedRecipes = async (id) =>{
         try{
             const res = await fetch('/like',{
@@ -156,90 +155,6 @@ function FilterRecipes(){
     return(
         <div>
             <Container fluid style={{padding:"3% 8%"}}>
-                {/* <Categories filterMenu= {filterMenu} /> */}
-                {/*-------------------------categories dropdown menu----------------------- */}
-                <div style={{margin:"15px", display:"flex",alignItems:"center",justifyContent:"space-evenly"}}>
-                    <Button variant="success" onClick={()=>setItems(data)}>All</Button>
-                    <Dropdown style={{margin:"8px"}}>
-                        <Dropdown.Toggle variant="success" id="dropdown-basic">
-                            Cuisine
-                        </Dropdown.Toggle>
-                                <Dropdown.Menu>
-                                    {/* <Dropdown.Item onClick={()=>setItems(data)}>All</Dropdown.Item> */}
-                                    <Dropdown.Item onClick={()=>filterMenu('America')}>America</Dropdown.Item>
-                                    <Dropdown.Item onClick={()=>filterMenu('Chinese')}>Chinese</Dropdown.Item>
-                                    <Dropdown.Item onClick={()=>filterMenu('French')}>French</Dropdown.Item>
-                                    <Dropdown.Item onClick={()=>filterMenu('Italian')}>Italian</Dropdown.Item>
-                                    <Dropdown.Item onClick={()=>filterMenu('Indian')}>Indian</Dropdown.Item>
-                                    <Dropdown.Item onClick={()=>filterMenu('Japanese')}>Japanese</Dropdown.Item>
-                                    <Dropdown.Item onClick={()=>filterMenu('Korean')}>Korean</Dropdown.Item>
-                                    <Dropdown.Item onClick={()=>filterMenu('Mexican')}>Mexican</Dropdown.Item>
-                                    <Dropdown.Item onClick={()=>filterMenu('Spanish')}>Spanish</Dropdown.Item>
-                                    <Dropdown.Item onClick={()=>filterMenu('Thai')}>Thai</Dropdown.Item>
-                                </Dropdown.Menu>
-                    </Dropdown>            
-                    {/* Course */}
-                    <Dropdown style={{margin:"8px"}}>
-                        <Dropdown.Toggle variant="success" id="dropdown-basic">
-                            Course
-                        </Dropdown.Toggle>
-                                <Dropdown.Menu>
-                                    {/* <Dropdown.Item onClick={()=>setItems(data)}>All</Dropdown.Item> */}
-                                    <Dropdown.Item onClick={()=>filterMenu('BreakFast')}>Breakfast</Dropdown.Item>
-                                    <Dropdown.Item onClick={()=>filterMenu('Brunch')}>Brunch</Dropdown.Item>
-                                    <Dropdown.Item onClick={()=>filterMenu('Dessert')}>Dessert</Dropdown.Item>
-                                    <Dropdown.Item onClick={()=>filterMenu('Drinks')}>Drinks</Dropdown.Item>
-                                    <Dropdown.Item onClick={()=>filterMenu('Lunch')}>Lunch</Dropdown.Item>
-                                    <Dropdown.Item onClick={()=>filterMenu('Snack')}>Snack</Dropdown.Item>
-                                    <Dropdown.Item onClick={()=>filterMenu('Soup-course')}>Soup-course</Dropdown.Item>
-                                    <Dropdown.Item onClick={()=>filterMenu('Dinner')}>Dinner</Dropdown.Item>
-                                </Dropdown.Menu>
-                    </Dropdown>
-
-                    <Dropdown style={{margin:"8px"}}>
-                        <Dropdown.Toggle variant="success" id="dropdown-basic">
-                            Mood
-                        </Dropdown.Toggle>
-                                <Dropdown.Menu>
-                                    {/* <Dropdown.Item onClick={()=>setItems(data)}>All</Dropdown.Item> */}
-                                    <Dropdown.Item onClick={()=>filterMenu('Casual')}>Casual</Dropdown.Item>
-                                    <Dropdown.Item onClick={()=>filterMenu('Comfort')}>Comfort</Dropdown.Item>
-                                    <Dropdown.Item onClick={()=>filterMenu('Happy')}>Happy</Dropdown.Item>
-                                    <Dropdown.Item onClick={()=>filterMenu('Family Friendly')}>Family Friendly</Dropdown.Item>
-                                    <Dropdown.Item onClick={()=>filterMenu('Pocket Friendly')}>Pocket Friendly</Dropdown.Item>
-                                </Dropdown.Menu>
-                    </Dropdown>
-
-                    <Dropdown style={{margin:"8px"}}>
-                        <Dropdown.Toggle variant="success" id="dropdown-basic">
-                            Skill
-                        </Dropdown.Toggle>
-                                <Dropdown.Menu>
-                                    {/* <Dropdown.Item onClick={()=>setItems(data)}>All</Dropdown.Item> */}
-                                    <Dropdown.Item onClick={()=>filterMenu('Easy')}>Easy</Dropdown.Item>
-                                    <Dropdown.Item onClick={()=>filterMenu('Medium')}>Medium</Dropdown.Item>
-                                    <Dropdown.Item onClick={()=>filterMenu('Hard')}>Hard</Dropdown.Item>
-                                    <Dropdown.Item onClick={()=>filterMenu('Kids')}>Kids</Dropdown.Item>
-                                </Dropdown.Menu>
-                    </Dropdown>
-
-                    <Dropdown style={{margin:"8px"}}>
-                        <Dropdown.Toggle variant="success" id="dropdown-basic">
-                            Diet
-                        </Dropdown.Toggle>
-                                <Dropdown.Menu>
-                                    {/* <Dropdown.Item onClick={()=>setItems(data)}>All</Dropdown.Item> */}
-                                    <Dropdown.Item onClick={()=>filterMenu('Low Fat')}>Low Fat</Dropdown.Item>
-                                    <Dropdown.Item onClick={()=>filterMenu('Low Calorie')}>Low Calorie</Dropdown.Item>
-                                    <Dropdown.Item onClick={()=>filterMenu('Vegetarian')}>Vegetarian</Dropdown.Item>
-                                    <Dropdown.Item onClick={()=>filterMenu('Low Salt')}>Low Salt</Dropdown.Item>
-                                    <Dropdown.Item onClick={()=>filterMenu('Healthy')}>Healthy</Dropdown.Item>
-                                </Dropdown.Menu>
-                    </Dropdown>
-                </div>
-
-
-            {/* -----------------------search bar-------------------------------------------- */}
             <Form className="d-flex" 
                 style={{marginBottom:"20px", size:"4px"}}>
                     <FormControl
@@ -255,16 +170,15 @@ function FilterRecipes(){
                     <span style={{width:"50px"}}><FcSearch size="2x"/></span>
                     {/* <span style={{width:"50px"}}><BiSearchAlt size="2x"/></span> */}
             </Form>
-            {/* --------------------------recipepage-------------------------------- */}
                 <Row style={{textAlign:"center"}}>
-                    {items.filter((rec)=>{
+                    {data.filter((rec)=>{
                         if(searchTerm === ""){
                             return rec
                         }else if(rec.title.toLowerCase().includes(searchTerm.toLowerCase())){
                             return rec
                         }
                     }).map((rec) =>                    
-                        <Col md={6} lg={3} key={rec._id}>
+                        <Col md={6} lg={3}>
                             <Card style={{ width: '18rem', margin:"10px" }}
                            
                             >
@@ -281,7 +195,6 @@ function FilterRecipes(){
                                  onClick={() => {
                                     navigate(`${rec._id}`);
                                     }}
-                                
                                 >
                                     <Card.Title>{rec.title}</Card.Title>
                                     <Card.Text

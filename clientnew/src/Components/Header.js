@@ -34,23 +34,8 @@ function Header() {
                 style={{ maxHeight: '100px' }}
                 navbarScroll
             >
-                {/* <Nav.Link href="#action1">Home</Nav.Link>
-                <Nav.Link href="#action2">Link</Nav.Link> */}
-                {/* dropdown#1 */}
-                {/* <NavDropdown title="Traditional" id="navbarScrollingDropdown">
-                    <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">East</Link></NavDropdown.Item>
-                    <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">North</Link></NavDropdown.Item>
-                    <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">North Eastern</Link></NavDropdown.Item>
-                    <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">West</Link></NavDropdown.Item>
-                    <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">South</Link></NavDropdown.Item>
-                </NavDropdown> */}
-                {/* <NavDropdown.Divider /> */}
-                {/* <NavDropdown.Item href="#action5"> */}
-                    {/* Something else here */}
-                {/* </NavDropdown.Item> */}
-                
-                {/* dropdown#2 */}
-                <NavDropdown title="Cuisine"  id="navbarScrollingDropdown">
+               
+                {/* <NavDropdown title="Cuisine"  id="navbarScrollingDropdown">
                     <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">American</Link></NavDropdown.Item>
                     <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">Chinese</Link></NavDropdown.Item>
                     <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">French</Link></NavDropdown.Item>
@@ -63,7 +48,7 @@ function Header() {
                     <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">Thai</Link></NavDropdown.Item>
                 </NavDropdown>
 
-                {/* dropdown#3 */}
+        
 
                 <NavDropdown title="Course" id="navbarScrollingDropdown">
                     <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">BreakFast</Link></NavDropdown.Item>
@@ -76,7 +61,7 @@ function Header() {
                     <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">Dinner</Link></NavDropdown.Item>
                 </NavDropdown>
 
-                {/* dropdown#4 */}
+        
                 <NavDropdown title="Mood" id="navbarScrollingDropdown">
                     <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">Casual</Link></NavDropdown.Item>
                     <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">Comfort</Link></NavDropdown.Item>
@@ -85,7 +70,6 @@ function Header() {
                     <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">Pocket Friendly</Link></NavDropdown.Item>
                 </NavDropdown>
 
-                {/* dropdown#5 */}
                 <NavDropdown title="Skill" id="navbarScrollingDropdown">
                     <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">Easy</Link></NavDropdown.Item>
                     <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">Medium</Link></NavDropdown.Item>
@@ -93,7 +77,7 @@ function Header() {
                     <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">Kids</Link></NavDropdown.Item>
                 </NavDropdown>
 
-                {/* dropdown#6 */}
+                
                 <NavDropdown title="Diet" id="navbarScrollingDropdown">
                     <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">Low Fat</Link></NavDropdown.Item>
                     <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">Low Calorie</Link></NavDropdown.Item>
@@ -101,7 +85,7 @@ function Header() {
                     <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">Low-salt</Link></NavDropdown.Item>
                     <NavDropdown.Item ><Link style={{color:"black", textDecoration:"none"}} to="/">Healthy</Link></NavDropdown.Item>
                     
-                </NavDropdown>
+                </NavDropdown> */}
             </Nav>
             
             <Form className="d-flex">

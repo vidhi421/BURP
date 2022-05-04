@@ -8,6 +8,7 @@ import InputGroup from "react-bootstrap/InputGroup"
 import React from "react"
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
+import PasswordChecklist from "react-password-checklist"
 
 function SignUp() {
   const navigate=useNavigate()
@@ -129,6 +130,14 @@ function SignUp() {
             type="password" 
             placeholder="Password" 
             required/>
+             
+			<PasswordChecklist
+				rules={["minLength","specialChar","number","capital"]}
+				minLength={8}
+				value={user.password}
+				onChange={(isValid) => {}}
+			/>
+
             <Form.Control.Feedback type="invalid">
                 Please choose a Password.
               </Form.Control.Feedback>

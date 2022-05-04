@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card'
 import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
 import Button from 'react-bootstrap/Button'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate ,Link} from 'react-router-dom'
 import { useEffect , useState } from 'react';
 import '../App.css'
 import Add from  './Add.js'
@@ -29,6 +29,7 @@ function Profile() {
 
     const[myPost, setPost]=useState([]);
     const[myLike, setLike]=useState([]);
+    //const[data,setData]=useState({});
     const  callProfile = async () =>{
         try{
             const res = await fetch('/Profile',{
@@ -103,15 +104,22 @@ function Profile() {
         MyLikes();
     },[]);
 
-    const handelDelete = async()=>{
-        try{
-            await axios.delete("/"+path);
-            window.location.replace("/")
-        }
-        catch(err)
-        {
-
-        }
+    const DeleteRecipe = (recipeId)=>{
+        fetch(`/deleterecipe/${recipeId}`,{
+            method: "DELETE",
+            headers:{
+                Accept:"application/json",
+                "Content-type":"application/json"
+            },
+            credentials:"include"
+        }).then(res=>res.json())
+        .then(result=>{
+            console.log(result)
+            const newData = myPost.filter(item=>{
+                return item._id !== result._id
+            })
+            setPost(newData)
+        })
     }
 
 
@@ -122,7 +130,7 @@ function Profile() {
             <Container>
                 <div style={{display:"flex" ,justifyContent:"space-between", marginTop:"10px"}}>
                     <h1 >Welcome To BURP!</h1>
-                    <Button variant="danger">Log Out</Button>
+                     <Link to="/logout"><Button variant="danger">Log Out</Button></Link>
                 </div>
                 
                 <hr></hr>
@@ -182,14 +190,20 @@ function Profile() {
                                     height: "15vh"}}>
                                 {item.description}
                                 </Card.Text>
-                                <Card.Footer style={{textAlign:"right"}}>
-                                <span 
-                                     onClick={handelDelete}
- 
-                                     ><BsTrash/></span>
-                                {/* <BsTrash/>{' '}<AiFillEdit onClick={handelDelete}/> */}
-                                </Card.Footer>
+                               
                             </Card.Body>
+                            <Card.Footer style={{textAlign:"right"}}>
+                                <span 
+                                     onClick={()=>DeleteRecipe(item._id)}
+ 
+                                     ><BsTrash/></span>{'  '}
+                                {/* <AiFillEdit/>{' '}<AiFillEdit onClick={handelDelete}/> */}
+                                 <span 
+                                    onClick={() => {
+                                    navigate(`${item._id}`);
+                                        }}
+                                     ><AiFillEdit/></span>
+                                </Card.Footer>
                             
                         </Card>
                         </Col>
