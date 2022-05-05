@@ -10,8 +10,6 @@ import Form from 'react-bootstrap/Form'
 import {useNavigate} from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 //import {createContext} from "react";
-// import Categories from './Categories'
-import Dropdown from 'react-bootstrap/Dropdown'
 
 //icons
 import { FcSearch } from "react-icons/fc";
@@ -19,6 +17,7 @@ import { AiOutlineHeart } from 'react-icons/ai'
 import { AiFillHeart } from 'react-icons/ai'
 import { BsHandThumbsDown } from "react-icons/bs";
 import { BsHandThumbsUp } from "react-icons/bs";
+import Dropdown from 'react-bootstrap/Dropdown'
 
 function FilterRecipes(){
     // rec represents single object
@@ -26,7 +25,19 @@ function FilterRecipes(){
     const [data, setData] = useState([]);
     const [userData , setUserData] = useState({}); 
     const navigate=useNavigate()
-    
+    const [items,setItems]=useState(data);
+    //const UserContext=createContext();
+
+    //const {state,dispatch} =useContext(UserContext)
+
+
+    // useEffect(() => {
+    //     fetch('/allrecipe')
+    //     .then(res=>res.json())
+    //     .then(result=>{
+    //         setData(result.recipes)
+    //     })
+    // },[]);
 
     const  AllRecipes = async () =>{
         try{
@@ -48,17 +59,7 @@ function FilterRecipes(){
             console.log(err);
         }
     }
-
-    const [items,setItems]=useState(data);
-    const filterMenu=(category)=>{
-        const updatedItems=data.filter((curElem)=>{
-            return (curElem.cuisine===category || curElem.course===category || curElem.diet===category|| curElem.skills===category|| curElem.mood===category);
-        });
-        setItems(updatedItems);
-        // setData(updatedItems);
-        // console.log(updatedItems)
-    }
-
+  
     const  LikedRecipes = async (id) =>{
         try{
             const res = await fetch('/like',{
@@ -75,7 +76,7 @@ function FilterRecipes(){
     
             const result2 = await res.json();
 
-            const newData = data.map(item=>{
+            const newData = items.map(item=>{
                 if(item._id===result2._id){
                     return result2
                 }else{
@@ -107,7 +108,7 @@ function FilterRecipes(){
           const result2 = await res.json();
           //console.log(data);
 
-          const newData = data.map(item=>{
+          const newData = items.map(item=>{
               if(item._id===result2._id){
                   return result2
               }else{
@@ -152,13 +153,22 @@ function FilterRecipes(){
         AllRecipes();
     },[]);
 
+    
+    const filterMenu=(category)=>{
+        const updatedItems=data.filter((curElem)=>{
+            return (curElem.cuisine===category || curElem.course===category || curElem.diet===category|| curElem.skills===category|| curElem.mood===category);
+        });
+        setItems(updatedItems);
+        // setData(updatedItems);
+        // console.log(updatedItems)
+    }
+
+    
 
     return(
         <div>
             <Container fluid style={{padding:"3% 8%"}}>
-                {/* <Categories filterMenu= {filterMenu} /> */}
-                {/*-------------------------categories dropdown menu----------------------- */}
-                <div style={{margin:"15px", display:"flex",alignItems:"center",justifyContent:"space-evenly"}}>
+            <div style={{margin:"15px", display:"flex",alignItems:"center",justifyContent:"space-evenly"}}>
                     <Button variant="success" onClick={()=>setItems(data)}>All</Button>
                     <Dropdown style={{margin:"8px"}}>
                         <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -237,9 +247,6 @@ function FilterRecipes(){
                                 </Dropdown.Menu>
                     </Dropdown>
                 </div>
-
-
-            {/* -----------------------search bar-------------------------------------------- */}
             <Form className="d-flex" 
                 style={{marginBottom:"20px", size:"4px"}}>
                     <FormControl
@@ -255,7 +262,6 @@ function FilterRecipes(){
                     <span style={{width:"50px"}}><FcSearch size="2x"/></span>
                     {/* <span style={{width:"50px"}}><BiSearchAlt size="2x"/></span> */}
             </Form>
-            {/* --------------------------recipepage-------------------------------- */}
                 <Row style={{textAlign:"center"}}>
                     {items.filter((rec)=>{
                         if(searchTerm === ""){
@@ -264,7 +270,7 @@ function FilterRecipes(){
                             return rec
                         }
                     }).map((rec) =>                    
-                        <Col md={6} lg={3} key={rec._id}>
+                        <Col md={6} lg={3}>
                             <Card style={{ width: '18rem', margin:"10px" }}
                            
                             >
@@ -281,7 +287,6 @@ function FilterRecipes(){
                                  onClick={() => {
                                     navigate(`${rec._id}`);
                                     }}
-                                
                                 >
                                     <Card.Title>{rec.title}</Card.Title>
                                     <Card.Text
@@ -295,7 +300,7 @@ function FilterRecipes(){
                                     {rec.likes.includes(userData._id)
                                     ? 
                                      <span
-                                     onClick={()=>{UnLikedRecipes (rec._id)}}
+                                     onClick={()=>{UnLikedRecipes(rec._id)}}
                                      ><BsHandThumbsDown/></span>
                                    : 
                                      <span 

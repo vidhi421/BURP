@@ -104,6 +104,8 @@ function AddRecipe() {
                 const error = new Error(res.error);
                 throw error;
             }
+
+           
         }catch(err){
             console.log(err);
             navigate('/LoginPage');

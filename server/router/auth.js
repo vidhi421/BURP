@@ -31,6 +31,12 @@ router.get('/Profile', authenticate ,(req,res) => {
     console.log("hello profile");
     res.send(req.rootUser);
 })
+
+router.get('/logout',(req,res)=>{
+    console.log("log out");
+    res.clearCookie('jwtoken',{path:'/'})
+    res.status(200).send("user logout")
+});
 //using promises
 
 // router.post('/SignUpPage',(req,res) => {
@@ -146,7 +152,7 @@ router.post('/AddRecipe',upload.single('image'),authenticate,(req,res) => {
     
     const{author,title,description,cuisine,mood,diet,skills,course,numserve,cooktime,instruction,ingredients,kcal,fat,protein,carbs,sugar,fibre}=req.body;
 
-    if( !author || !title || !description || !ingredients || !skills || !cuisine  || !mood  || !course || !instruction ){
+    if( !author || !title || !image || !description || !ingredients || !skills || !cuisine  || !mood  || !course || !instruction ){
         return  res.status(422).json({error:"fill the required fields!"});        
     }
     req.rootUser.password=undefined
@@ -312,11 +318,7 @@ router.delete("/deleterecipe/:recipeId",authenticate,(req,res)=> {
    })
 })
 
-router.get('/logout',(req,res)=>{
-    console.log("log out");
-    res.clearCookie('jwtoken',{path:'/'})
-    res.status(200).send("user logout")
-});
+
 
 
 

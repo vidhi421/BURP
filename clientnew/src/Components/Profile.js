@@ -130,7 +130,7 @@ function Profile() {
             <Container>
                 <div style={{display:"flex" ,justifyContent:"space-between", marginTop:"10px"}}>
                     <h1 >Welcome To BURP!</h1>
-                     <Link to="/logout"><Button variant="danger">Log Out</Button></Link>
+                     <Link to="/Logout"><Button variant="danger">Log Out</Button></Link>
                 </div>
                 
                 <hr></hr>

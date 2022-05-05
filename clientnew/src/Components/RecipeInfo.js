@@ -203,7 +203,7 @@ function RecipeInfo() {
                 </Col>
                 {/* <div style={{textAlign:"right",display:"flex", width:"100px",bottom:"-20%"}}>  */}
                 
-
+                 
                  <div style={{textAlign:"right"}}
                   onClick={()=>setupdateMode(true)}
                 
